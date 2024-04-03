@@ -305,6 +305,8 @@ public class EntityVoidWormPart extends LivingEntity implements IHurtableMultipa
             if (this.getChild() instanceof EntityVoidWormPart) {
                 EntityVoidWormPart segment = (EntityVoidWormPart) this.getChild();
                 EntityVoidWorm worm2 = AMEntityRegistry.VOID_WORM.get().create(level());
+                worm2.setNoAi(worm.isNoAi());
+                worm2.setInvulnerable(worm.isInvulnerable());
                 worm2.copyPosition(this);
                 segment.copyPosition(this);
                 worm2.setChildId(segment.getUUID());
