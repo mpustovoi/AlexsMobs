@@ -314,7 +314,7 @@ public class EntityVoidWormPart extends LivingEntity implements IHurtableMultipa
                     level().addFreshEntity(worm2);
                 }
                 worm2.setSplitter(true);
-                worm2.setMaxHealth(worm.getMaxHealth() / 2F, true);
+                worm2.setBaseMaxHealth(worm.getBaseMaxHealth() / 2F, true);
                 worm2.setSplitFromUuid(worm.getUUID());
                 worm2.setWormSpeed((float) Mth.clamp(worm.getWormSpeed() * 0.8, 0.4F, 1F));
                 worm2.resetWormScales();
