@@ -11,4 +11,4 @@ Se pueden criar con pan. A los mapaches domesticados se les puede dar una alfomb
 Cuando son asesinados, los mapaches tienen la posibilidad de dejar caer la cola.
 <NEWLINE>
 <NEWLINE>
-Estas colas se pueden usar para hacer el sombrero de la frontera, que otorga una bonificación de velocidad al agacharse.
+Estas colas se pueden usar para hacer el sombrero de la frontera, que otorga mayor velocidad al caminar agachados.
