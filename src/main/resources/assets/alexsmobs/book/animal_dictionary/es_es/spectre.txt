@@ -2,7 +2,7 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-Un espectro es el pariente lejano del fantasma de la Superficie y solo se puede encontrar en el gran vacío entre las islas del End. Estos seres etéreos no pueden ser atacados por ningún medio normal, excepto por daño mágico como pociones.
+Un espectro es el pariente lejano del fantasma de la Superficie y solo se puede hallar en el gran vacío entre las islas del End. Estos seres etéreos no pueden ser atacados por ningún medio normal, excepto por daño mágico como pociones.
 Sin embargo, no debería haber necesidad de atacarlos, ya que los espectros son completamente pacíficos, a diferencia de sus primos los fantasmas.
 Los espectros generalmente no se interesan por los asuntos mundanos, pero sí encuentran un interés especial en los corazones de almas y seguirán a cualquier persona que sostenga uno.
 <NEWLINE>
