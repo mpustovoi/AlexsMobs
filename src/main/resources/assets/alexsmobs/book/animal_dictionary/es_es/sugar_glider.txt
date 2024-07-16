@@ -12,4 +12,4 @@ Cuando un petauro del azúcar está sobre la cabeza de su dueño, este experimen
 Ocasionalmente, los petauros del azúcar domesticados buscarán objetos a través de bloques de hojas.
 Por lo general, se trata de basura, como brotes de árboles o palos, pero a veces se pueden encontrar objetos valiosos como flechas, pelaje de oso o astas de alce.
 <NEWLINE>
-Los petauros del azúcar pueden criarse con panales. Los bebés petauro son incapaces de planear.
+Los petauros del azúcar pueden criarse con panales. Los bebés petauros son incapaces de planear.
