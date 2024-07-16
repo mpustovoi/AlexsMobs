@@ -10,6 +10,7 @@ Esta piel se puede usar para crear un diseño de estandarte único o para crear 
 <NEWLINE>
 Este lazo se puede lanzar para capturar a cualquier criatura, incluidos los monstruos, similar a la rienda. Sin embargo, el lazo de lianas no se puede atar a vallas.
 <NEWLINE>
+<NEWLINE>
 Es bastante útil para transportar criaturas hostiles.
 <NEWLINE>
 La anaconda se puede pacificar y criar con pollo.
