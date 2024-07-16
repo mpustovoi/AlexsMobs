@@ -2,7 +2,7 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-Las mofetas son mamíferos que ocasionalmente se pueden encontrar deambulando por los bosques. Son naturalmente muy asustadizos e intentarán huir de cualquier depredador grande que encuentren.
+Las mofetas son mamíferos que ocasionalmente se pueden avistar deambulando por los bosques. Son naturalmente muy asustadizos e intentarán huir de cualquier depredador grande que vean.
 Si la persiguen implacablemente por el bosque o la lastiman de alguna manera, la mofeta se defenderá rociando un líquido sobre su perseguidor, provocándole náuseas.
 <NEWLINE>
 Parte de esta esencia fétida puede incluso permanecer en el mundo, adhiriéndose a las superficies sobre las que ha rociado la mofeta. Se puede embotellar en un frasco, que luego se utiliza como combustible para el rociador de peste.
