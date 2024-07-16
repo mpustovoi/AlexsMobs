@@ -11,4 +11,4 @@ El bagre regurgitará cualquier objeto o criatura que haya comido si se lastima 
 Aunque tienen mala visión, algo en la luz intermitente de una linterna del mar les resulta llamativo. Estas se pueden usar para atraer bagres a áreas específicas.
 <NEWLINE>
 Todos los bagres, incluso los grandes, se pueden capturar con un cubo de agua. El contenido del vientre del bagre se conservará, por lo que se puede utilizar eficazmente el bagre para transportar objetos o una criatura colocándolos en cubos después de alimentarlo.
-Los bagres que hayan comido objetos o que hayan sido recogidos con cubos no desaparecerán.
+Los bagres que hayan comido objetos o hayan sido metidos en cubos no desaparecerán.
