@@ -12,8 +12,7 @@ Cuando la presa está cerca del borde del mundo, el farseer tiene la oportunidad
 <NEWLINE>
 Si se encuentra con un farseer, sin duda será extremadamente hostil. Intentarán disolver a cualquier oponente en pura estática usando sus rápidas garras o un rayo devastador disparado desde el ojo. Si estos ataques no se esquivan o flanquean, es muy probable que el farseer tenga éxito: sus ataques atraviesan armaduras y encantamientos por igual.
 <NEWLINE>
-Cuando es asesinado, un farseer puede dejar caer uno de sus muchos brazos. Estos, junto con algo de obsidiana y una estrella del Nether, se pueden usar para crear una mesa de transmutación.
-<NEWLINE>
+Cuando es asesinado, un farseer puede soltar uno de sus muchos brazos. Estos, junto con algo de obsidiana y una estrella del Nether, se pueden usar para crear una mesa de transmutación.
 <NEWLINE>
 Usando la misma magia que usan los farseer para transformar la materia en nada, esta tabla permite transmutar pilas enteras de elementos en diferentes elementos.
 Cuando se abre, esta mesa tiene una ranura que se puede llenar con cualquier elemento apilable. Una vez hecho esto, aparecerán tres posibilidades, que se pueden seleccionar para transformar toda la pila de elementos en el elemento seleccionado, por un costo de experiencia.
