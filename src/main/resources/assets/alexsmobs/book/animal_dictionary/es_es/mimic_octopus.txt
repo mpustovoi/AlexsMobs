@@ -7,7 +7,7 @@ Este pulpo puede cambiar de color para coincidir con cualquier bloque que vea, y
 <NEWLINE>
 Un jugador puede domesticar pulpos mimo alimentándolos con cinco a ocho colas de langosta, pero solo cuando no están camuflados activamente. Aunque son naturalmente pacíficos, los mimos domesticados intentarán asustar a cualquier posible atacante de sus dueños cambiando de forma, a menudo a un monstruo.
 Una vez domesticado, el pulpo puede seguir a su dueño a la tierra, pero hay que tener en cuenta que se secarán en este ambiente tóxico. Se debe aplicar una bola de slime cada pocos días para evitar esto. Al interactuar con un pulpo mimo domesticado con un saco de tinta, se puede alternar si debe cambiar de forma aleatoriamente o no.
-Al usar un fragmento o cristal de prismarina en un pulpo, este puede recordar y tomar la forma de un guardián. Lo mismo ocurre con los peces globo y pólvora de creepers. Ninguno de estos 'recordatorios' consume el objeto.
+Al usar un fragmento o cristal de prismarina en un pulpo, este puede recordar y tomar la forma de un guardián. Lo mismo ocurre con los peces globo y pólvora de creepers. Ninguno de estos usos consume el objeto.
 <NEWLINE>
 Al igual que otras criaturas domesticables, a estos pulpos se les puede ordenar que esperen, deambulen o sigan. Si uno aplica de cinco a ocho mimicremas sobre un pulpo mimo, puede aprender no solo a imitar la forma de las criaturas, sino también sus habilidades en combate.
 Estos pulpos pueden disparar rayos como guardianes, pinchar con púas tóxicas como peces globo y explotar como creepers.
