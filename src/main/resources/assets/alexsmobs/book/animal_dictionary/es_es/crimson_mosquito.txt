@@ -7,4 +7,4 @@ Primero se abalanza sobre su presa y se aferra, succionándola hasta dejarla sec
 <NEWLINE>
 Si se mata mientras está inflado con sangre, el mosquito carmesí puede dejar caer un saco de sangre. También puede dejar caer su probóscide. Ambos materiales se pueden usar para crear un rociador de sangre, un arma única que usa sangre de mosquito para causar daño de área de efecto. El rociador de sangre utiliza sacos de sangre como munición.
 <NEWLINE>
-Si una mosca común de la Superficie es llevada al Nether, puede transformarse en un mosquito carmesí.
+Si una mosca común de la Superficie es llevada al Nether, se transformará en un mosquito carmesí.
