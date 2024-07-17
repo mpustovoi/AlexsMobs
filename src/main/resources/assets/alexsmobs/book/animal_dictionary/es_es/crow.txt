@@ -5,7 +5,7 @@ Los cuervos son aves ruidosas que se encuentran en bosques y llanuras. Estas cri
 Estas aves generalmente se dispersan y surcan los cielos cuando se les acerca. Los cuervos recogen cualquier alimento que pueda caber en sus picos y lo devoran.
 <NEWLINE>
 A pesar de su apariencia huraña, los cuervos pueden ser domesticados arrojándoles algunas semillas de calabaza. Los cuervos domesticados son criaturas extremadamente útiles con una variedad de usos diferentes. Se les puede hacer sentarse, deambular, seguir o recoger objetos.
-Cualquier cuervo domesticado que se siente sobre una bala de heno recuperará la salud lentamente. También volarán alrededor de este bloque de heno más tarde, cuando estén listos para recoger objetos. 
+Cualquier cuervo domesticado que se siente sobre una bala de heno recuperará la salud lentamente. También volarán alrededor de esta bala de heno más tarde, cuando estén listos para recoger objetos. 
 <NEWLINE>
 Cuando un cuervo al que se le ha ordenado recoger encuentra un objeto, buscará un contenedor, como un cofre o un horno, que tenga puesto un marco de objetos.
 Si el objeto en el marco es el mismo que el que está sostenido en el pico del cuervo, lo depositará desde ese lado en el contenedor. Cuando se les ordene seguir, los cuervos volarán alrededor de su dueño y, después de un rato, intentarán sentarse sobre sus hombros.
