@@ -5,7 +5,7 @@
 <NEWLINE>
 El farseer es un ser de más allá de las dimensiones, que vive en universos ortogonales al nuestro. Sólo pueden cruzar desde sus incomprensibles mundos natales en las mismas fronteras del mundo, lo que hace que los encuentros con estas bestias sean extremadamente raros.
 <NEWLINE>
-Sin embargo, esto no significa que sean imposibles de encontrar. Con un poco de dedicación, uno puede crear un tallador dimensional destrozado colocando un tallador dimensional en una cápside. A diferencia de la variante normal de esta herramienta, el tallador destrozado creará un portal que conduce a un millón de bloques en cualquier dirección.
+Sin embargo, esto no significa que sean imposibles de encontrar. Con un poco de dedicación, uno puede crear un tallador de dimensiones destrozado colocando un tallador de dimensiones en una cápside. A diferencia de la variante normal de esta herramienta, el tallador destrozado creará un portal que conduce a un millón de bloques en cualquier dirección.
 Simplemente usar esta herramienta varias veces en la misma dirección podría llevar a estar dentro del alcance del farseer.
 <NEWLINE>
 Cuando la presa está cerca del borde del mundo, el farseer tiene la oportunidad de abrir un portal y aparecer justo al lado, sorprendiéndola rápidamente.
