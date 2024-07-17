@@ -80,7 +80,7 @@
   "item.alexsmobs.spawn_egg_mudskipper": "Generar pez del fango",
   "item.alexsmobs.spawn_egg_rhinoceros": "Generar rinoceronte",
   "item.alexsmobs.spawn_egg_sugar_glider": "Generar petauro del azúcar",		
-  "item.alexsmobs.spawn_egg_farseer": "Generar farseer", #
+  "item.alexsmobs.spawn_egg_farseer": "Generar farseer",
   "item.alexsmobs.spawn_egg_skreecher": "Generar skreecher",
   "item.alexsmobs.spawn_egg_underminer": "Generar minero espectral",
   "item.alexsmobs.spawn_egg_murmur": "Generar murmur",	
@@ -154,7 +154,7 @@
   "item.alexsmobs.warped_mixture": "Mezcla distorsionada",
   "item.alexsmobs.straddlite": "Escamas de basaltante",
   "item.alexsmobs.stradpole_bucket": "Cubo con larva de basaltante",
-  "item.alexsmobs.straddleboard": "Tabla de surf ignífuga", #
+  "item.alexsmobs.straddleboard": "Tabla de surf ignífuga",
   "item.alexsmobs.emu_egg": "Huevo de emú",
   "item.alexsmobs.boiled_emu_egg": "Huevo de emú cocido",
   "item.alexsmobs.emu_feather": "Pluma de emú",
@@ -243,8 +243,8 @@
   "item.alexsmobs.novelty_hat": "Gorra novedosa",
   "item.alexsmobs.novelty_hat.desc": "¡Para el número 1!",
   "item.alexsmobs.mudskipper_bucket": "Cubo con pez del fango",
-  "item.alexsmobs.farseer_arm": "Brazo de farseer", #
-  "item.alexsmobs.skreecher_soul": "Alma de skreecher", #
+  "item.alexsmobs.farseer_arm": "Brazo de farseer",
+  "item.alexsmobs.skreecher_soul": "Alma de skreecher",
   "item.alexsmobs.ghostly_pickaxe": "Pico fantasmal",
   "item.alexsmobs.elastic_tendon": "Tendón elástico",
   "item.alexsmobs.tendon_whip": "Látigo de tendón",
@@ -462,7 +462,7 @@
   "entity.alexsmobs.hemolymph": "Hemolinfa",
   "entity.alexsmobs.straddler": "Basaltante",
   "entity.alexsmobs.stradpole": "Larva de basaltante",
-  "entity.alexsmobs.straddleboard": "Tabla de lavasurf", #
+  "entity.alexsmobs.straddleboard": "Tabla de surf ignífuga",
   "entity.alexsmobs.emu": "Emú",
   "entity.alexsmobs.platypus": "Ornitorrinco",
   "entity.alexsmobs.dropbear": "Koala asesino",
@@ -529,7 +529,7 @@
   "entity.alexsmobs.mud_ball": "Bola de barro",
   "entity.alexsmobs.rhinoceros": "Rinoceronte",
   "entity.alexsmobs.sugar_glider": "Petauro del azúcar",	
-  "entity.alexsmobs.farseer": "Farseer", #
+  "entity.alexsmobs.farseer": "Farseer",
   "entity.alexsmobs.skreecher": "Skreecher",
   "entity.alexsmobs.underminer": "Minero espectral",
   "entity.alexsmobs.murmur": "Murmur",
@@ -720,13 +720,13 @@
   "alexsmobs.sound.subtitle.rhinoceros_idle": "Ginoceronte rezonga",
   "alexsmobs.sound.subtitle.sugar_glider_hurt": "Petauro del azúcar chilla",
   "alexsmobs.sound.subtitle.sugar_glider_idle": "Petauro del azúcar jadea",
-  "alexsmobs.sound.subtitle.farseer_hurt": "Farseer chilla", #
+  "alexsmobs.sound.subtitle.farseer_hurt": "Farseer chilla",
   "alexsmobs.sound.subtitle.farseer_idle": "Farseer zumba",
   "alexsmobs.sound.subtitle.farseer_emerge": "Farseer entra a la realidad",
   "alexsmobs.sound.subtitle.farseer_beam": "Farseer dispara",
   "alexsmobs.sound.subtitle.transmute_item": "Objeto cambia de forma",
-  "alexsmobs.sound.subtitle.skreecher_hurt": "Skreecher herido", #
-  "alexsmobs.sound.subtitle.skreecher_call": "Skreecher chirria", #
+  "alexsmobs.sound.subtitle.skreecher_hurt": "Skreecher herido",
+  "alexsmobs.sound.subtitle.skreecher_call": "Skreecher chirria",
   "alexsmobs.sound.subtitle.skreecher_detects": "Skreecher se exalta",
   "alexsmobs.sound.subtitle.skreecher_clap": "Skreecher aplaude",
   "alexsmobs.sound.subtitle.sculk_boomer_fart": "Bramador de sculk explota",
@@ -754,9 +754,9 @@
   "alexsmobs.sound.subtitle.caiman_splash": "Caimán chapotea",
   "alexsmobs.sound.subtitle.end_pirate_door": "Puerta pirata cruje",
   "enchantment.alexsmobs.straddle_jump": "Salto de basalto",
-  "enchantment.alexsmobs.straddle_jump.desc": "Aumenta la altura de los saltos de la tabla de surf ignífuga.", #
+  "enchantment.alexsmobs.straddle_jump.desc": "Aumenta la altura de los saltos de la tabla de surf ignífuga.",
   "enchantment.alexsmobs.lavawax": "Protección sobre lava",
-  "enchantment.alexsmobs.lavawax.desc": "Otorga protección contra el fuego al montador de la tabla de surf ignífuga.", #
+  "enchantment.alexsmobs.lavawax.desc": "Otorga protección contra el fuego al montador de la tabla de surf ignífuga.",
   "enchantment.alexsmobs.serpentfriend": "Domador de serpientes",
   "enchantment.alexsmobs.serpentfriend.desc": "Hace a las serpientes óseas neutrales al montador de la tabla de surf ignífuga.",
   "enchantment.alexsmobs.board_return": "Tabla retornante",
@@ -953,7 +953,7 @@
   "advancements.alexsmobs.kangaroo.title": "Canguro Jack",
   "advancements.alexsmobs.kangaroo.desc": "Encuentra un canguro.",
   "advancements.alexsmobs.save_cachalot_whale.title": "Flotador para ballenas",
-  "advancements.alexsmobs.save_cachalot_whale.desc": "Salva un cachalote varado en una playa y recibe ámbar gris como regalo.",
+  "advancements.alexsmobs.save_cachalot_whale.desc": "Salva un cachalote varado en una playa devolviéndolo al agua y recibe ámbar gris como regalo.",
   "advancements.alexsmobs.echolocator.title": "Ecolocación subterránea",
   "advancements.alexsmobs.echolocator.desc": "Fabrica un ecolocalizador para localizar cuevas cercanas.",
   "advancements.alexsmobs.endolocator.title": "¡End a la vista!",
@@ -964,7 +964,7 @@
   "advancements.alexsmobs.gongylidia.desc": "Consigue un gongilidio dentro de un hormiguero. Coloca un brillongo cerca para no alterar a los residentes.",
   "advancements.alexsmobs.leafcutter_ant_pupa.title": "Tu propio hormiguero",
   "advancements.alexsmobs.leafcutter_ant_pupa.desc": "Consigue una pupa de hormiga podadora, colócala en la tierra para crear tu propia colonia.",
-  "advancements.alexsmobs.enderiophage.title": "Distanciamiento social",
+  "advancements.alexsmobs.enderiophage.title": "Dist-end-ciamiento social",
   "advancements.alexsmobs.enderiophage.desc": "Encuentra un enderiófago, un gigante biomecánico construido por los Endermans en el End.",
   "advancements.alexsmobs.capsid.title": "Cápside-19",
   "advancements.alexsmobs.capsid.desc": "Consigue una cápside asesinando un enderiófago. Útil para mostrar items o para transportarlos de forma vertical.",
@@ -1051,7 +1051,7 @@
   "advancements.alexsmobs.shattered_dimensional_carver.title": "Viaje express hacia el final",
   "advancements.alexsmobs.shattered_dimensional_carver.desc": "Destroza un tallador de dimensiones poniéndolo en una cápside. Ahora abrirá un portal a un millón de bloques.",
   "advancements.alexsmobs.farseer.title": "Seguridad fronteriza",
-  "advancements.alexsmobs.farseer.desc": "Encuentra un farseer, el protector del borde del mundo.", #
+  "advancements.alexsmobs.farseer.desc": "Encuentra un farseer, protector del borde del mundo.",
   "advancements.alexsmobs.transmutation_table.title": "La gema de la realidad",
   "advancements.alexsmobs.transmutation_table.desc": "Fabrica una mesa de transmutación.",
   "advancements.alexsmobs.transmute_1000_items.title": "Intercambio no equivalente",
@@ -1061,9 +1061,9 @@
   "advancements.alexsmobs.ghostly_pickaxe.title": "Top 10 fantasmas reales captados en cámara",
   "advancements.alexsmobs.ghostly_pickaxe.desc": "Consigue un pico fantasmal de un minero espectral.",
   "advancements.alexsmobs.skreecher.title": "Por favor, cállate",
-  "advancements.alexsmobs.skreecher.desc": "Encuentra un skreecher en los biomas de sculk.", #
+  "advancements.alexsmobs.skreecher.desc": "Encuentra un skreecher en los biomas de sculk.",
   "advancements.alexsmobs.sculk_boomer.title": "Ok boomer",
-  "advancements.alexsmobs.sculk_boomer.desc": "Fabrica un bramador de sculk con almas de skreecher.", #
+  "advancements.alexsmobs.sculk_boomer.desc": "Fabrica un bramador de sculk con almas de skreecher.",
   "advancements.alexsmobs.murmur.title": "Tortícolis",
   "advancements.alexsmobs.murmur.desc": "Encuentra un murmur. Cuidado, no es lo que parece.",
   "advancements.alexsmobs.skunk.title": "Olor hippie",
