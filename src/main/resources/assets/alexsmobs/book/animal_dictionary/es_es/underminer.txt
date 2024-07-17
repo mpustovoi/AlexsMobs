@@ -2,7 +2,7 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-Los mineros espectrales son habitantes raros y fantasmales de las minas abandonados. Debido a su naturaleza etérea, pueden atravesar paredes con facilidad y solo pueden dañarse con magia, como pociones arojadizas.
+Los mineros espectrales son habitantes raros y fantasmales de las minas abandonados. Debido a su naturaleza etérea, pueden atravesar paredes con facilidad y solo pueden dañarse con magia, como pociones arrojadizas.
 La mayoría de los mineros espectrales solo comenzarán a aparecer si se pasa mucho tiempo en una mina.
 Sin embargo, no representan ninguna amenaza para los vivos, siempre y cuando no sean atacados primero. Sin embargo, su desconfianza hacia los recién llegados es evidente: desaparecerán temporalmente si se les acerca. Los mineros se contentan con acechar los pasillos de las minas abandonadas, como lo han estado haciendo durante cientos de años.
 <NEWLINE>
