@@ -9,7 +9,7 @@ Estas ballenas son capaces de romper el hielo cuando se mueven, pero si cargan p
 <NEWLINE>
 El cachalote puede parecer un gigante, pero todavía está amenazado por algunas fuerzas de la naturaleza. A las orcas les encanta comerse los cachalotes jóvenes, y sus madres intentarán defenderlos ferozmente de cualquier daño.
 Durante las poderosas tormentas eléctricas, los cachalotes pueden quedar varados en las playas. Están indefensos en esta forma, y si se los empuja de regreso al agua sin que se lastimen, pueden decidir recompensar a sus salvadores.
-La recompensa por esta tarea es en forma de ámbar gris, un subproducto valioso del estómago que el cachalote regurgita. El ámbar gris se puede intercambiar con los pescadores aldeanos por una gran cantidad de esmeraldas, o se puede usar para fabricar un ecolocalizador.
+La recompensa por esta tarea es en forma de ámbar gris, un subproducto valioso del estómago que el cachalote regurgita. El ámbar gris se puede intercambiar con los aldeanos pescadores por una gran cantidad de esmeraldas, o se puede usar para fabricar un ecolocalizador.
 También se puede utilizar como un combustible potente que puede fundir 64 elementos.
 <NEWLINE>
 El ecolocalizador se puede utilizar para revelar cuevas cercanas. Una vez que se ha encontrado una cueva, emitirá una onda sonora en dirección a la cueva. Se debe ser conservador con esta herramienta, ya que tiene un número limitado de usos.
