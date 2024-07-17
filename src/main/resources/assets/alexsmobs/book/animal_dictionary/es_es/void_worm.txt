@@ -9,6 +9,6 @@ El gusano abisal está equipado con múltiples ataques devastadores. En primer l
 Al intentar matar a esta bestia, uno debe asegurarse de causar un daño significativo sólo en la cabeza. Si un segmento del cuerpo está gravemente herido, dejará de brillar y, si se destruye, todo el gusano se partirá en dos. Estos gusanos divididos tendrán la mitad de la salud y se moverán un poco más lento, pero aún causarán una gran cantidad de daño. Si no se tiene cuidado, se puede terminar completamente inundado de gusanos.
 <NEWLINE>
 Cuando es asesinado, el gusano deja caer un ojo y sus dos mandíbulas. Estas se pueden juntar para formar el pico de gusano, un trofeo que cuando se activa con redstone muerde a cualquier criatura que atrape con sus mandíbulas.
-El ojo se puede usar con las mandíbulas y algo de netherita para crear un pico mágico: el tallador dimensional.
+El ojo se puede usar con las mandíbulas y algo de netherita para crear un pico mágico: el tallador de dimensiones.
 <NEWLINE>
-A diferencia de otros picos, el tallador dimensional no se usa para romper bloques, sino para desgarrar la realidad misma. Al usar la herramienta en cualquier lugar, uno puede abrir un portal de regreso a su punto de reaparición. Del otro lado, también se abrirá un portal de retorno temporal, por sólo un minuto. Hay que asegurarse de no abusar de esta herramienta, ya que solo tiene 20 usos.
+A diferencia de otros picos, el tallador de dimensiones no se usa para romper bloques, sino para desgarrar la realidad misma. Al usar la herramienta en cualquier lugar, uno puede abrir un portal de regreso a su punto de reaparición. Del otro lado, también se abrirá un portal de retorno temporal, por sólo un minuto. Hay que asegurarse de no abusar de esta herramienta, ya que solo tiene 20 usos.
