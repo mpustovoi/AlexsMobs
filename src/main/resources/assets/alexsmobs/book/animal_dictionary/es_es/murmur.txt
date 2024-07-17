@@ -14,7 +14,7 @@ Los tendones elásticos se pueden combinar con las garras de koala asesino para 
 Esta arma cuerpo a cuerpo de alcance medio se puede blandir como una espada e infligirá daño a hasta tres criaturas cercanas, con daño descendente. Se puede utilizar desde más de 8 bloques de distancia y puede encontrar un objetivo automáticamente.
 El látigo se puede reparar con tendones elásticos.
 <NEWLINE>
-El kimono inquietante puede funcionar como peto. Aunque tiene poca armadura y durabilidad, aumenta la distancia de colocación de su portador en dos bloques y hace que la mayoría de monstruos muertos vivientes sean neutrales a su presencia, a excepción de otros murmur y el Wither.
+El kimono inquietante puede usarse como peto. Aunque tiene poca armadura y durabilidad, aumenta la distancia de colocación de su portador en dos bloques y hace que la mayoría de monstruos muertos vivientes sean neutrales a su presencia, a excepción de otros murmur y el Wither.
 Se puede reparar con lana.
 <NEWLINE>
 Aunque los murmur normalmente se encuentran a grandes profundidades, en raras ocasiones pueden aparecer en cerezales.
