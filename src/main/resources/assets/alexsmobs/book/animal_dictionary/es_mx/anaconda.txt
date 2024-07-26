@@ -8,7 +8,7 @@ Como son tragados enteros, los animales asesinados por la anaconda no sueltan ni
 Después de tragar a su presa, la serpiente digiere lentamente su comida. Después de comer algunas comidas abundantes, la serpiente se decolorará y comenzará a mudar la piel.
 Esta piel se puede usar para crear un diseño de estandarte único o para crear un lazo de lianas.
 <NEWLINE>
-Este lazo se puede lanzar para capturar a cualquier criatura, incluidos los monstruos, similar a la rienda. Sin embargo, el lazo de lianas no se puede atar a vallas.
+Este lazo se puede lanzar para capturar a cualquier criatura, incluidos los monstruos, similar a la correa. Sin embargo, el lazo de lianas no se puede atar a vallas.
 <NEWLINE>
 <NEWLINE>
 Es bastante útil para transportar criaturas hostiles.

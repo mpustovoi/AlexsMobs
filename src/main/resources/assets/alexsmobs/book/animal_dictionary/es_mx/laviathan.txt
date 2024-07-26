@@ -4,7 +4,7 @@
 <NEWLINE>
 Los laviatanes son reptiles magmáticos gigantes cubiertos de piedra negra que se encuentran en los grandes lagos de lava del Nether. Aunque de apariencia temible, los laviatanes son totalmente pacíficos e intentan huir si son heridos.
 <NEWLINE>
-Un laviatán se puede montar y controlar equipándole una montura y cabestro hechos de escamas de basaltante.
+Un laviatán se puede montar y controlar equipándole una montura y cabestro hechos de escamas de straddler.
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>

@@ -8,4 +8,4 @@ Después de atrapar algunas presas con sus mandíbulas, el tiburón usará sus d
 <NEWLINE>
 Si uno obtiene algunos dientes de tiburón serrados, puede usarlos, junto con otros elementos acuáticos, para crear el escudo de las profundidades. Este escudo es un poco más duradero de lo normal, pero también produce el efecto de exanguinación al bloquear ataques cercanos.
 <NEWLINE>
-Los tiburones anguila se pueden transportar colocándolos en un cubo con agua. Si un tiburón anguila se encuentra a menos de 10 bloques de presión de agua, se decolorará y será aún más lento de lo normal.
+Los tiburones anguila se pueden transportar colocándolos en una cubeta de agua. Si un tiburón anguila se encuentra a menos de 10 bloques de presión de agua, se decolorará y será aún más lento de lo normal.

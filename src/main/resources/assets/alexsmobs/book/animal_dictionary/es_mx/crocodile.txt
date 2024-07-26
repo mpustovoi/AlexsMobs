@@ -7,4 +7,4 @@ El cocodrilo es un reptil enorme que aparece en raras ocasiones en ríos y panta
 Aunque son hostiles, los cocodrilos se pueden criar con carne podrida. Después de reproducirse, los cocodrilos irán a tierra para poner sus huevos. Si estos huevos se dañan, los padres se volverán agresivos.
 Después de un tiempo, los huevos de cocodrilo eclosionarán y el cocodrilo bebé podrá encariñarse con el jugador más cercano. Defenderá la zona de su nacimiento de los monstruos. Interactuar con él también puede hacer que se quede quieto.
 <NEWLINE>
-La criatura deja caer escamas cuando se vuelve adulta o al morir. Estas escamas se pueden utilizar para crear un peto protector que aumenta la velocidad de nado del usuario. También se pueden utilizar para hacer una copia de este libro.
+La criatura deja caer escamas cuando se vuelve adulta o al morir. Estas escamas se pueden utilizar para crear una pechera protectora que aumenta la velocidad de nado del usuario. También se pueden utilizar para hacer una copia de este libro.

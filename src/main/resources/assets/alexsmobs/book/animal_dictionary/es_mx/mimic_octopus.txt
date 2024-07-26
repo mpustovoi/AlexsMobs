@@ -12,4 +12,4 @@ Al usar un fragmento o cristal de prismarina en un pulpo, este puede recordar y 
 Al igual que otras criaturas domesticables, a estos pulpos se les puede ordenar que esperen, deambulen o sigan. Si uno aplica de cinco a ocho mimicremas sobre un pulpo mimo, puede aprender no solo a imitar la forma de las criaturas, sino también sus habilidades en combate.
 Estos pulpos pueden disparar rayos como guardianes, pinchar con púas tóxicas como peces globo y explotar como creepers.
 <NEWLINE>
-Los pulpos mimo domesticados se pueden recoger con cubos y criar con peces tropicales. Hay que asegurarse de no mantener ningún pulpo mimo cerca de tiburones o camarones mantis, sus depredadores naturales.
+Los pulpos mimo domesticados se pueden recoger con cubetas y criar con peces tropicales. Hay que asegurarse de no mantener ningún pulpo mimo cerca de tiburones o camarones mantis, sus depredadores naturales.
