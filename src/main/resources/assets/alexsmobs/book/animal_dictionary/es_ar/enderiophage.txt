@@ -2,13 +2,13 @@
 <NEWLINE>
 <NEWLINE>
 <NEWLINE>
-The Enderiophage is a monstrous biochemical automaton uncommonly found in the End Midlands. This unnatural creature seems to have been created with one purpose in mind - eliminating the End's native Endergrades.
-However, due to their sparse population, it is unlikely their creators were successful in their Endeavor. The Enderiophage's attack depends on it inflicting an effect known as the Ender Flu on its prey. Although it lasts ten minutes, by the time the effect passes the host will erupt with new, smaller phages, and promptly die from the massive damage.
-This effect can be removed by consuming chorus fruit or milk. Other inflicted creatures can also be given the fruit to be healed.
+El enderiófago es un monstruoso autómata bioquímico que se encuentra con poca frecuencia en las islas medias del End. Esta criatura antinatural parece haber sido creada con un propósito en mente: eliminar a los enderígrados nativos del End.
+Sin embargo, debido a su escasa población, es poco probable que sus creadores tuvieran éxito en su esfuerzo. El ataque del enderiófago depende de que inflija un efecto conocido como gripe de ender en su presa. Aunque dura diez minutos, cuando el efecto acaba, pequeños fagos saldrán violentamente del cuerpo del infectado, que morirá rápidamente a causa del daño masivo.
+Este efecto se puede eliminar consumiendo fruta de chorus o leche. A otras criaturas afligidas también se les puede dar el fruto para que las sanen.
 <NEWLINE>
-The Enderiophage, although neutral to most, is also hostile towards Endermen. After inflicting its prey with Ender Flu, the Eye of Ender inside the phage will shatter, leaving them to seek out the sight of an Endermen.
-To restore this ability, it will latch onto an Enderman and afflict it with blindness, while it tries to sneak off with its eye regained. A Enderiophage is unable to attack without an eye.
+El enderiófago, aunque neutral para el resto de criaturas, también es hostil hacia los Enderman. Después de infectar a su presa, el ojo de ender dentro del fago se romperá, volviéndolo inofensivo.
+Para restaurar su habilidad, se aferrará a un Enderman y lo afligirá con ceguera, mientras intenta escabullirse con su ojo recuperado. Un enderiófago no puede atacar sin un ojo.
 <NEWLINE>
-On destruction, the Enderiophage can drop a unique block called the Capsid. This capsid can hold up to an entire stack of items inside of it, and when another capsid or inventory is placed above it, the item will float up.
-In this manner, the capsid can be used to transport items upwards. The Capsid can also be crafted with iron nuggets and endstone in order to create an Enderiophage Rocket, which can be used in place of the Firework Rocket while flying with the Elytra.
-If an Eye of Ender is placed on a Capsid above a vertical End Rod, it will transform into an Enderiophage! Perhaps that is how these beings came to be...
+Al ser destruido, el enderiófago puede soltar un bloque único llamado cápside. Esta cápside puede contener hasta una pila completa de elementos en su interior, y cuando se coloca otra cápside o inventario encima, el elemento flotará.
+De esta manera, la cápside se puede utilizar para transportar ítems hacia arriba. La cápside también se puede combinar con pepitas de hierro y piedra del End para crear un cohete de enderiófago, que se puede usar en lugar de los cohetes convencionales mientras se vuela con elytra.
+Si se coloca un ojo de ender en una cápside encima de una vara del End vertical, ¡se transformará en un enderiófago! Si no se construye de esta manera, cualquier enderiófago existente de forma natural parece estar hecho de materiales comunes a la dimensión en la que apareció. Quizás así surgieron estos seres...
