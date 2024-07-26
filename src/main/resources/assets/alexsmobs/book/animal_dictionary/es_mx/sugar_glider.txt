@@ -9,7 +9,7 @@ Se puede hacer que los petauros del azúcar domesticados esperen, sigan o deambu
 También se pueden colocar en la cabeza al agacharse e interactuar con ellos.
 Cuando un petauro del azúcar está sobre la cabeza de su dueño, este experimentará una caída lenta.
 <NEWLINE>
-Ocasionalmente, los petauros del azúcar domesticados buscarán objetos a través de bloques de hojas.
-Por lo general, se trata de basura, como retoños de árboles o palos, pero a veces se pueden encontrar objetos valiosos como flechas, pelaje de oso o astas de alce.
+Ocasionalmente, los petauros del azúcar domesticados buscarán ítems a través de bloques de hojas.
+Por lo general, se trata de basura, como retoños de árboles o palos, pero a veces se pueden encontrar ítems valiosos como flechas, pelaje de oso o astas de alce.
 <NEWLINE>
 Los petauros del azúcar pueden criarse con panales. Los bebés petauros son incapaces de planear.
