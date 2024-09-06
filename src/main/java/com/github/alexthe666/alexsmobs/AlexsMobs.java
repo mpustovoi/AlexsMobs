@@ -177,7 +177,7 @@ public class AlexsMobs {
     }
 
     private void setupClient(FMLClientSetupEvent event) {
-        PROXY.clientInit();
+        event.enqueueWork(PROXY::clientInit);
     }
 
 }
