@@ -193,7 +193,7 @@ public class AMConfig {
     public static boolean bananasDropFromLeaves = true;
     public static boolean acaciaBlossomsDropFromLeaves = true;
     public static int bananaChance = 200;
-    public static int blossomChance = 130;
+    public static int acaciaBlossomChance = 130;
     public static boolean neutralBoneSerpents = false;
     public static boolean spidersAttackFlies = true;
     public static boolean wolvesAttackMoose = true;
@@ -469,6 +469,7 @@ public class AMConfig {
             raccoonsStealFromChests = ConfigHolder.COMMON.raccoonStealFromChests.get();
             crowsStealCrops = ConfigHolder.COMMON.crowsStealCrops.get();
             acaciaBlossomsDropFromLeaves = ConfigHolder.COMMON.acaciaBlossomsDropFromLeaves.get();
+            acaciaBlossomChance = ConfigHolder.COMMON.acaciaBlossomChance.get();
             soulVultureSpawnOnFossil = ConfigHolder.COMMON.soulVultureSpawnOnFossil.get();
             wanderingTraderOffers = ConfigHolder.COMMON.wanderingTraderOffers.get();
             mungusBiomeTransformationType = ConfigHolder.COMMON.mungusBiomeTransformationType.get();

@@ -207,6 +207,7 @@ public class CommonConfig {
     public final ForgeConfigSpec.BooleanValue fishOilMeme;
     public final ForgeConfigSpec.BooleanValue soulVultureSpawnOnFossil;
     public final ForgeConfigSpec.BooleanValue acaciaBlossomsDropFromLeaves;
+    public final ForgeConfigSpec.IntValue acaciaBlossomChance;
     public final ForgeConfigSpec.BooleanValue wanderingTraderOffers;
     public final ForgeConfigSpec.IntValue mungusBiomeTransformationType;
     public final ForgeConfigSpec.ConfigValue<List<? extends String>> mungusBiomeMatches;
@@ -277,6 +278,7 @@ public class CommonConfig {
         fishOilMeme = buildBoolean(builder, "fishOilMeme", "all", true, "Whether fish oil gives players a special levitation effect.");
         soulVultureSpawnOnFossil = buildBoolean(builder, "soulVultureSpawnOnFossil", "all", true, "Whether soul vulture spawns should be restricted solely to the nether fossil structure or to whatever biome is specified in their respective biome config.");
         acaciaBlossomsDropFromLeaves = buildBoolean(builder, "acaciaBlossomsDropFromLeaves", "all", true, "Whether acacia blossoms should drop from blocks tagged with #alexsmobs:drops_acacia_blossoms");
+        acaciaBlossomChance = buildInt(builder, "acaciaBlossomChance", "all", AMConfig.acaciaBlossomChance, 0, Integer.MAX_VALUE, "1 out of this number chance for leaves to drop an acacia when broken. Fortune is automatically factored in");
         wanderingTraderOffers = buildBoolean(builder, "wanderingTraderOffers", "all", true, "Whether wandering traders offer items like acacia blossoms, mosquito larva, crocodile egg, etc.");
         mungusBiomeTransformationType = buildInt(builder, "mungusBiomeTransformationType", "all", AMConfig.mungusBiomeTransformationType, 0, 2, "0 = no mungus biome transformation. 1 = mungus changes blocks, but not chunk's biome. 2 = mungus transforms blocks and biome of chunk.");
         mungusBiomeMatches = builder.comment("List of all mungus mushrooms, biome transformations and surface blocks. Each is seperated by a |. Add an entry with a block registry name, biome registry name, and block registry name(for the ground).").defineList("mungusBiomeMatches", AMConfig.mungusBiomeMatches, o -> o instanceof String);
