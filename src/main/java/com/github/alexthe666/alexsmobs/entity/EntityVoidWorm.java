@@ -378,10 +378,14 @@ public class EntityVoidWorm extends Monster {
         }
     }
 
-    public void setMaxHealth(double maxHealth, boolean heal){
+    public double getBaseMaxHealth() {
+        return this.getAttributeBaseValue(Attributes.MAX_HEALTH);
+    }
+
+    public void setBaseMaxHealth(double maxHealth, boolean heal){
         this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(maxHealth);
         if(heal){
-            this.heal((float)maxHealth);
+            this.heal(this.getMaxHealth());
         }
     }
 
@@ -471,7 +475,7 @@ public class EntityVoidWorm extends Monster {
             reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
         this.setSegmentCount(25 + random.nextInt(15));
         this.setXRot(0.0F);
-        this.setMaxHealth(AMConfig.voidWormMaxHealth, true);
+        this.setBaseMaxHealth(AMConfig.voidWormMaxHealth, true);
         return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
