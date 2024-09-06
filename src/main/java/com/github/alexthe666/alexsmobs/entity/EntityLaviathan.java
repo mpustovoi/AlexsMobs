@@ -518,10 +518,6 @@ public class EntityLaviathan extends Animal implements ISemiAquatic, IHerdPanic 
         walkAnimation.update(f2, 0.4F);
     }
 
-    public void setDeltaMovement(Vec3 p_20257_) {
-        super.setDeltaMovement(p_20257_);
-    }
-
     public int getMaxHeadXRot() {
         return 50;
     }
@@ -896,6 +892,13 @@ public class EntityLaviathan extends Animal implements ISemiAquatic, IHerdPanic 
         return (float) (l + 1);
     }
 
+    public boolean causeFallDamage(float distance, float damageMultiplier) {
+        return false;
+    }
+
+    protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {
+    }
+
     public boolean checkSpawnObstruction(LevelReader worldIn) {
         return worldIn.isUnobstructed(this);
     }
@@ -1067,14 +1070,6 @@ public class EntityLaviathan extends Animal implements ISemiAquatic, IHerdPanic 
                     float lvt_9_1_ = (float) (Mth.atan2(lvt_5_1_, lvt_1_1_) * 57.2957763671875D) - 90.0F;
                     this.laviathan.setYRot(this.rotlerp(this.laviathan.getYRot(), lvt_9_1_, 5F));
                     this.laviathan.setYHeadRot(this.rotlerp(this.laviathan.getYHeadRot(), lvt_9_1_, 90.0F));
-                    //BlockPos blockpos = this.mob.blockPosition();
-                    //BlockState blockstate = this.mob.level().getBlockState(blockpos);
-                    //VoxelShape voxelshape = blockstate.getCollisionShape(this.mob.level(), blockpos);
-                    if (lvt_3_1_ >= 0 && laviathan.horizontalCollision) {
-                        laviathan.setDeltaMovement(laviathan.getDeltaMovement().add(0.0D, 0.5D, 0.0D));
-                    } else {
-                        laviathan.setDeltaMovement(laviathan.getDeltaMovement().add(0.0D, (double) laviathan.getSpeed() * lvt_3_1_ * 0.6D, 0.0D));
-                    }
                     if (laviathan.shouldSwim()) {
                         laviathan.setSpeed(speed * 0.03F);
                         float lvt_11_1_ = -((float) (Mth.atan2(lvt_3_1_, Mth.sqrt((float) (lvt_1_1_ * lvt_1_1_ + lvt_5_1_ * lvt_5_1_))) * 57.2957763671875D));
