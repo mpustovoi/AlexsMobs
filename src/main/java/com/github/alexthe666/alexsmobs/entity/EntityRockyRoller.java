@@ -318,8 +318,7 @@ public class EntityRockyRoller extends Monster implements ICustomCollisions {
     }
 
     public boolean hurt(DamageSource dmg, float amount) {
-        if (!this.isMoving() && !dmg.is(DamageTypes.MAGIC) && dmg.getDirectEntity() instanceof LivingEntity) {
-            LivingEntity livingentity = (LivingEntity) dmg.getDirectEntity();
+        if (!this.isMoving() && !dmg.is(DamageTypes.MAGIC) && dmg.getDirectEntity() instanceof LivingEntity livingentity && !(livingentity instanceof EntityRockyRoller)) {
             if (!dmg.is(DamageTypes.EXPLOSION) && !livingentity.hurtMarked) {
                 livingentity.hurt(damageSources().thorns(this), 2.0F);
             }
