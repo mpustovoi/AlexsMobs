@@ -537,7 +537,7 @@ public class EntityMungus extends Animal implements ITargetsDroppedItems, Sheara
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.getItem() == AMItemRegistry.MUNGAL_SPORES.get();
+        return stack.is(AMTagRegistry.MUNGUS_BREEDABLES);
     }
 
     @Nullable

@@ -2,6 +2,7 @@ package com.github.alexthe666.alexsmobs.entity.ai;
 
 import com.github.alexthe666.alexsmobs.entity.EntityHummingbird;
 import com.github.alexthe666.alexsmobs.misc.AMBlockPos;
+import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -96,7 +97,7 @@ public class HummingbirdAIPollinate  extends MoveToBlockGoal {
 
     @Override
     protected boolean isValidTarget(LevelReader worldIn, BlockPos pos) {
-        if (worldIn.getBlockState(pos).is(BlockTags.BEE_GROWABLES) || worldIn.getBlockState(pos).is(BlockTags.FLOWERS)) {
+        if (worldIn.getBlockState(pos).is(AMTagRegistry.HUMMINGBIRD_POLLINATES)) {
             return bird.pollinateCooldown == 0 && bird.canBlockBeSeen(pos);
         }
         return false;

@@ -3,7 +3,6 @@ package com.github.alexthe666.alexsmobs.entity;
 import com.github.alexthe666.alexsmobs.config.AMConfig;
 import com.github.alexthe666.alexsmobs.entity.ai.*;
 import com.github.alexthe666.alexsmobs.entity.util.Maths;
-import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import net.minecraft.ChatFormatting;
@@ -36,7 +35,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
@@ -162,7 +160,7 @@ public class EntityWarpedToad extends TamableAnimal implements ITargetsDroppedIt
         this.goalSelector.addGoal(3, new AnimalAIFindWater(this));
         this.goalSelector.addGoal(3, new AnimalAILeaveWater(this));
         this.goalSelector.addGoal(3, new BreedGoal(this, 0.8D));
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(AMTagRegistry.INSECT_ITEMS), false));
+        this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(AMTagRegistry.WARPED_TOAD_FOODSTUFFS), false));
         this.goalSelector.addGoal(5, new WarpedToadAIRandomSwimming(this, 1.0D, 7));
         this.goalSelector.addGoal(6, new AnimalAILeapRandomly(this, 50, 7){
             public boolean canUse(){
@@ -215,15 +213,14 @@ public class EntityWarpedToad extends TamableAnimal implements ITargetsDroppedIt
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.getItem() == AMItemRegistry.MOSQUITO_LARVA.get() && isTame();
+        return stack.is(AMTagRegistry.WARPED_TOAD_BREEDABLES) && isTame();
     }
 
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        Item item = itemstack.getItem();
         InteractionResult type = super.mobInteract(player, hand);
-        if (!isTame() && item == AMItemRegistry.MOSQUITO_LARVA.get()) {
+        if (!isTame() && itemstack.is(AMTagRegistry.WARPED_TOAD_TAMEABLES)) {
             this.usePlayerItem(player, hand, itemstack);
             this.gameEvent(GameEvent.EAT);
             this.playSound(SoundEvents.STRIDER_EAT, this.getSoundVolume(), this.getVoicePitch());
@@ -235,7 +232,7 @@ public class EntityWarpedToad extends TamableAnimal implements ITargetsDroppedIt
             }
             return InteractionResult.SUCCESS;
         }
-        if (isTame() && itemstack.is(AMTagRegistry.INSECT_ITEMS)) {
+        if (isTame() && itemstack.is(AMTagRegistry.WARPED_TOAD_FOODSTUFFS)) {
             if (this.getHealth() < this.getMaxHealth()) {
                 this.usePlayerItem(player, hand, itemstack);
                 this.gameEvent(GameEvent.EAT);
@@ -473,7 +470,7 @@ public class EntityWarpedToad extends TamableAnimal implements ITargetsDroppedIt
 
     @Override
     public boolean canTargetItem(ItemStack stack) {
-        return stack.is(AMTagRegistry.INSECT_ITEMS);
+        return stack.is(AMTagRegistry.WARPED_TOAD_FOODSTUFFS);
     }
 
     @Override

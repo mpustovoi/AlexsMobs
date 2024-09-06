@@ -28,9 +28,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -41,6 +39,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.EnumSet;
 import java.util.Random;
+import java.util.stream.Stream;
 
 public class EntityGeladaMonkey extends Animal implements IAnimatedEntity, IHerdPanic {
 
@@ -117,7 +116,7 @@ public class EntityGeladaMonkey extends Animal implements IAnimatedEntity, IHerd
         this.goalSelector.addGoal(3, new AnimalAIHerdPanic(this, 1.5D));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(5, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, Ingredient.of(Items.WHEAT, Items.DEAD_BUSH), false));
+        this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, Ingredient.fromValues(Stream.of(new Ingredient.TagValue(AMTagRegistry.GELADA_MONKEY_BREEDABLES), new Ingredient.TagValue(AMTagRegistry.GELADA_MONKEY_LAND_CLEARING_FOODS))), false));
         this.goalSelector.addGoal(7, new GeladaAIGroom(this));
         this.goalSelector.addGoal(8, new RandomStrollGoal(this, 1D, 120));
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -145,7 +144,7 @@ public class EntityGeladaMonkey extends Animal implements IAnimatedEntity, IHerd
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.getItem() == Items.DEAD_BUSH;
+        return stack.is(AMTagRegistry.GELADA_MONKEY_BREEDABLES);
     }
 
     @Override
@@ -336,9 +335,8 @@ public class EntityGeladaMonkey extends Animal implements IAnimatedEntity, IHerd
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        Item item = itemstack.getItem();
         InteractionResult type = super.mobInteract(player, hand);
-        if(item == Items.WHEAT && this.getClearGrassTime() == 0){
+        if(itemstack.is(AMTagRegistry.GELADA_MONKEY_LAND_CLEARING_FOODS) && this.getClearGrassTime() == 0){
             this.usePlayerItem(player, hand, itemstack);
             this.eatGrassWithBuddies(3 + random.nextInt(2));
             return InteractionResult.SUCCESS;

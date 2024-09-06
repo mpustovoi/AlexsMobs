@@ -6,7 +6,6 @@ import com.github.alexthe666.alexsmobs.entity.ai.DirectPathNavigator;
 import com.github.alexthe666.alexsmobs.entity.ai.SeagullAIRevealTreasure;
 import com.github.alexthe666.alexsmobs.entity.ai.SeagullAIStealFromPlayers;
 import com.github.alexthe666.alexsmobs.entity.util.Maths;
-import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMBlockPos;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
@@ -59,6 +58,7 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class EntitySeagull extends Animal implements ITargetsDroppedItems {
 
@@ -151,7 +151,7 @@ public class EntitySeagull extends Animal implements ITargetsDroppedItems {
         this.targetSelector.addGoal(1, new SeagullAIRevealTreasure(this));
         this.targetSelector.addGoal(2, new SeagullAIStealFromPlayers(this));
         this.goalSelector.addGoal(3, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(Items.COD, AMItemRegistry.LOBSTER_TAIL.get(), AMItemRegistry.COOKED_LOBSTER_TAIL.get()), false){
+        this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.fromValues(Stream.of(new Ingredient.TagValue(AMTagRegistry.SEAGULL_BREEDABLES), new Ingredient.TagValue(AMTagRegistry.SEAGULL_OFFERINGS))), false){
             public boolean canUse(){
                 return !EntitySeagull.this.aiItemFlag && super.canUse();
             }
@@ -165,8 +165,7 @@ public class EntitySeagull extends Animal implements ITargetsDroppedItems {
     }
 
     public boolean isFood(ItemStack stack) {
-        Item item = stack.getItem();
-        return item == Items.COD;
+        return stack.is(AMTagRegistry.SEAGULL_BREEDABLES);
     }
 
     public static boolean canSeagullSpawn(EntityType<? extends Animal> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource random) {
@@ -449,7 +448,7 @@ public class EntitySeagull extends Animal implements ITargetsDroppedItems {
         }
         stealCooldown += 600 + random.nextInt(1200);
         Entity thrower = e.getOwner();
-        if(thrower != null && (e.getItem().getItem() == AMItemRegistry.LOBSTER_TAIL.get() || e.getItem().getItem() == AMItemRegistry.COOKED_LOBSTER_TAIL.get())){
+        if (thrower != null && e.getItem().is(AMTagRegistry.SEAGULL_OFFERINGS)) {
             Player player = level().getPlayerByUUID(thrower.getUUID());
             if(player != null){
                 setDataFromTreasureMap(player);

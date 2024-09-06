@@ -38,7 +38,6 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -52,7 +51,6 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -138,7 +136,7 @@ public class EntityBlueJay extends Animal implements ITargetsDroppedItems{
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.is(AMTagRegistry.INSECT_ITEMS);
+        return stack.is(AMTagRegistry.BLUE_JAY_BREEDABLES);
     }
 
     public boolean causeFallDamage(float distance, float damageMultiplier) {
@@ -574,12 +572,12 @@ public class EntityBlueJay extends Animal implements ITargetsDroppedItems{
         }
         this.heal(3);
         Entity itemThrower = e.getOwner();
-        if(itemThrower != null && e.getItem().is(Items.GLOW_BERRIES)){
+        if(itemThrower != null && e.getItem().is(AMTagRegistry.BLUE_JAY_TEAMING_FOODS)){
             this.setLastFeederUUID(itemThrower.getUUID());
             this.setFeedTime(1200);
             this.stopRiding();
         }
-        if(e.getOwner() != null && e.getItem().is(Tags.Items.SEEDS)){
+        if(e.getOwner() != null && e.getItem().is(AMTagRegistry.BLUE_JAY_ALERT_FOODS)){
             this.setSingTime(40);
         }
     }
@@ -588,7 +586,7 @@ public class EntityBlueJay extends Animal implements ITargetsDroppedItems{
         ItemStack itemstack = player.getItemInHand(hand);
         InteractionResult type = super.mobInteract(player, hand);
         if (!type.consumesAction()) {
-            if(itemstack.is(Items.GLOW_BERRIES) && this.getFeedTime() <= 0){
+            if(itemstack.is(AMTagRegistry.BLUE_JAY_TEAMING_FOODS) && this.getFeedTime() <= 0){
                 this.heal(3);
                 this.usePlayerItem(player, hand, itemstack);
                 this.setRaccoonUUID(null);
@@ -596,7 +594,7 @@ public class EntityBlueJay extends Animal implements ITargetsDroppedItems{
                 this.setLastFeeder(player);
                 this.setFeedTime(1200);
                 return InteractionResult.SUCCESS;
-            }else if(itemstack.is(Tags.Items.SEEDS) && this.getSingTime() <= 0){
+            }else if(itemstack.is(AMTagRegistry.BLUE_JAY_ALERT_FOODS) && this.getSingTime() <= 0){
                 this.heal(3);
                 this.setSingTime(40);
                 this.usePlayerItem(player, hand, itemstack);

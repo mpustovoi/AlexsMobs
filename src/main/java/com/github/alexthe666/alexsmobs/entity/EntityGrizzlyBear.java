@@ -92,7 +92,7 @@ public class EntityGrizzlyBear extends TamableAnimal implements NeutralMob, IAni
     private int honeyedTime;
     @Nullable
     private UUID salmonThrowerID = null;
-    private static final Ingredient TEMPTATION_ITEMS = Ingredient.of(Items.SALMON, Items.HONEYCOMB, Items.HONEY_BOTTLE);
+    private static final Ingredient TEMPTATION_ITEMS = Ingredient.of(AMTagRegistry.GORILLA_FOODSTUFFS);
     public int timeUntilNextFur = this.random.nextInt(24000) + 24000;
     protected static final EntityDimensions STANDING_SIZE = EntityDimensions.scalable(1.7F,  2.75F);
     private boolean recalcSize = false;
@@ -248,7 +248,7 @@ public class EntityGrizzlyBear extends TamableAnimal implements NeutralMob, IAni
 
     public boolean isFood(ItemStack stack) {
         Item item = stack.getItem();
-        return isTame() && item == Items.SALMON;
+        return isTame() && stack.is(AMTagRegistry.GRIZZLY_BREEDABLES);
     }
 
 
@@ -425,7 +425,7 @@ public class EntityGrizzlyBear extends TamableAnimal implements NeutralMob, IAni
                     }else{
                         this.heal(4);
                     }
-                    if(stack.getItem() == Items.SALMON && !this.isTame() && this.salmonThrowerID != null){
+                    if(stack.is(AMTagRegistry.GRIZZLY_TAMEABLES) && !this.isTame() && this.salmonThrowerID != null){
                        if(getRandom().nextFloat() < 0.3F){
                            this.setTame(true);
                            this.setOwnerUUID(this.salmonThrowerID);
@@ -721,7 +721,7 @@ public class EntityGrizzlyBear extends TamableAnimal implements NeutralMob, IAni
         }
         this.setItemInHand(InteractionHand.MAIN_HAND, duplicate);
         Entity thrower = targetEntity.getOwner();
-        if(targetEntity.getItem().getItem() == Items.SALMON && thrower != null && this.isHoneyed()){
+        if(targetEntity.getItem().is(AMTagRegistry.GRIZZLY_TAMEABLES) && thrower != null && this.isHoneyed()){
             salmonThrowerID = thrower.getUUID();
         }else{
             salmonThrowerID = null;

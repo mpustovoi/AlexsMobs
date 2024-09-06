@@ -5,6 +5,7 @@ import com.github.alexthe666.alexsmobs.entity.ai.AquaticMoveController;
 import com.github.alexthe666.alexsmobs.entity.ai.BoneSerpentPathNavigator;
 import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMBlockPos;
+import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -114,7 +115,7 @@ public class EntityStradpole extends WaterAnimal implements Bucketable {
     @Nonnull
     protected InteractionResult mobInteract(@Nonnull Player player, @Nonnull InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        if(itemstack.getItem() == AMItemRegistry.MOSQUITO_LARVA.get()){
+        if(itemstack.is(AMTagRegistry.STRADPOLE_GROWABLES)){
             if(!player.isCreative()){
                 itemstack.shrink(1);
             }

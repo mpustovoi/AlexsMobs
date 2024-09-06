@@ -7,6 +7,7 @@ import com.github.alexthe666.alexsmobs.entity.ai.AnimalAIWanderRanged;
 import com.github.alexthe666.alexsmobs.entity.ai.MooseAIJostle;
 import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
+import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import com.github.alexthe666.citadel.animation.Animation;
 import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.github.alexthe666.citadel.animation.IAnimatedEntity;
@@ -103,7 +104,7 @@ public class EntityMoose extends Animal implements IAnimatedEntity {
         this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.1D, true));
         this.goalSelector.addGoal(5, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.addGoal(7, new TemptGoal(this, 1.1D, Ingredient.of(Items.DANDELION), false));
+        this.goalSelector.addGoal(7, new TemptGoal(this, 1.1D, Ingredient.of(AMTagRegistry.MOOSE_BREEDABLES), false));
         this.goalSelector.addGoal(7, new AnimalAIWanderRanged(this, 120, 1.0D, 14, 7));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 15.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
@@ -126,7 +127,7 @@ public class EntityMoose extends Animal implements IAnimatedEntity {
     }
 
     public boolean isFood(ItemStack stack) {
-        if (stack.getItem() == Items.DANDELION && !this.isInLove() && this.getAge() == 0) {
+        if (stack.is(AMTagRegistry.MOOSE_BREEDABLES) && !this.isInLove() && this.getAge() == 0) {
             if (this.getRandom().nextInt(5) == 0) {
                 return true;
             } else {

@@ -10,7 +10,6 @@ import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import com.github.alexthe666.citadel.animation.Animation;
 import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.github.alexthe666.citadel.animation.IAnimatedEntity;
-import com.google.common.collect.ImmutableList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -41,7 +40,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -51,6 +49,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nullable;
 import java.util.stream.Stream;
@@ -83,13 +82,17 @@ public class EntityCapuchinMonkey extends TamableAnimal implements IAnimatedEnti
         this.setPathfindingMalus(BlockPathTypes.LEAVES, 0.0F);
     }
 
+    public static boolean isTameableFood(ItemStack stack) {
+        return stack.is(AMTagRegistry.CAPUCHIN_MONKEY_TAMEABLES);
+    }
+
     public static AttributeSupplier.Builder bakeAttributes() {
         return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.ATTACK_DAMAGE, 2.0D).add(Attributes.MOVEMENT_SPEED, 0.4F);
     }
 
     public static <T extends Mob> boolean canCapuchinSpawn(EntityType<EntityCapuchinMonkey> gorilla, LevelAccessor worldIn, MobSpawnType reason, BlockPos p_223317_3_, RandomSource random) {
         BlockState blockstate = worldIn.getBlockState(p_223317_3_.below());
-        return (blockstate.is(BlockTags.LEAVES) || blockstate.is(Blocks.GRASS_BLOCK) || blockstate.is(BlockTags.LOGS) || blockstate.is(Blocks.MANGROVE_ROOTS) || blockstate.is(Blocks.MUDDY_MANGROVE_ROOTS) || blockstate.is(Blocks.AIR)) && worldIn.getRawBrightness(p_223317_3_, 0) > 8;
+        return (blockstate.is(AMTagRegistry.CAPUCHIN_MONKEY_SPAWNS) || blockstate.is(Blocks.AIR)) && worldIn.getRawBrightness(p_223317_3_, 0) > 8;
     }
 
     public int getMaxSpawnClusterSize() {
@@ -106,7 +109,7 @@ public class EntityCapuchinMonkey extends TamableAnimal implements IAnimatedEnti
 
     public Ingredient getAllFoods(){
         if(temptItems == null){
-            temptItems = Ingredient.fromValues(Stream.of(new Ingredient.TagValue(AMTagRegistry.INSECT_ITEMS), new Ingredient.ItemValue(new ItemStack(Items.EGG))));
+            temptItems = Ingredient.fromValues(Stream.of(new Ingredient.TagValue(AMTagRegistry.CAPUCHIN_MONKEY_BREEDABLES), new Ingredient.TagValue(AMTagRegistry.CAPUCHIN_MONKEY_FOODSTUFFS)));
         }
         return temptItems;
     }
@@ -129,7 +132,7 @@ public class EntityCapuchinMonkey extends TamableAnimal implements IAnimatedEnti
         this.goalSelector.addGoal(3, new CapuchinAIMelee(this, 1, true));
         this.goalSelector.addGoal(3, new CapuchinAIRangedAttack(this, 1, 20, 15));
         this.goalSelector.addGoal(6, new TameableAIFollowOwner(this, 1.0D, 10.0F, 2.0F, false));
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.1D, Ingredient.merge(ImmutableList.of(Ingredient.of(AMTagRegistry.BANANAS))), true) {
+        this.goalSelector.addGoal(4, new TemptGoal(this, 1.1D, Ingredient.of(AMTagRegistry.CAPUCHIN_MONKEY_TAMEABLES), true) {
             public void tick() {
                 super.tick();
                 if (this.mob.distanceToSqr(this.player) < 6.25D && this.mob.getRandom().nextInt(14) == 0) {
@@ -433,7 +436,7 @@ public class EntityCapuchinMonkey extends TamableAnimal implements IAnimatedEnti
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         final ItemStack itemstack = player.getItemInHand(hand);
-        if (EntityGorilla.isBanana(itemstack)) {
+        if (isTameableFood(itemstack)) {
             if (!isTame()) {
                 this.usePlayerItem(player, hand, itemstack);
                 if (getRandom().nextInt(5) == 0) {
@@ -455,13 +458,13 @@ public class EntityCapuchinMonkey extends TamableAnimal implements IAnimatedEnti
 
         final InteractionResult interactionresult = itemstack.interactLivingEntity(player, this, hand);
         final InteractionResult type = super.mobInteract(player, hand);
-        if (interactionresult != InteractionResult.SUCCESS && type != InteractionResult.SUCCESS && isTame() && isOwnedBy(player) && !isFood(itemstack) && !EntityGorilla.isBanana(itemstack) && !getAllFoods().test(itemstack)) {
+        if (interactionresult != InteractionResult.SUCCESS && type != InteractionResult.SUCCESS && isTame() && isOwnedBy(player) && !isFood(itemstack) && !isTameableFood(itemstack) && !getAllFoods().test(itemstack)) {
             if (!this.hasDart() && itemstack.getItem() == AMItemRegistry.ANCIENT_DART.get()) {
                 this.setDart(true);
                 this.usePlayerItem(player, hand, itemstack);
                 return InteractionResult.CONSUME;
             }
-            if (this.hasDart() && itemstack.getItem() == Items.SHEARS) {
+            if (this.hasDart() && itemstack.is(Tags.Items.SHEARS)) {
                 this.setDart(false);
                 itemstack.hurtAndBreak(1, this, (p_233654_0_) -> {
                 });
@@ -503,12 +506,12 @@ public class EntityCapuchinMonkey extends TamableAnimal implements IAnimatedEnti
 
     @Override
     public boolean canTargetItem(ItemStack stack) {
-        return getAllFoods().test(stack) || EntityGorilla.isBanana(stack);
+        return getAllFoods().test(stack) || isTameableFood(stack);
     }
 
     public boolean isFood(ItemStack stack) {
         Item item = stack.getItem();
-        return isTame() && stack.is(AMTagRegistry.INSECT_ITEMS);
+        return isTame() && stack.is(AMTagRegistry.CAPUCHIN_MONKEY_BREEDABLES);
     }
 
     @Override
@@ -516,19 +519,20 @@ public class EntityCapuchinMonkey extends TamableAnimal implements IAnimatedEnti
         this.heal(5);
         this.gameEvent(GameEvent.EAT);
         this.playSound(SoundEvents.CAT_EAT, this.getSoundVolume(), this.getVoicePitch());
-        if (EntityGorilla.isBanana(e.getItem())) {
+        if (e.getItem().is(AMTagRegistry.BANANAS)) {
             if (getRandom().nextInt(4) == 0) {
                 this.spawnAtLocation(new ItemStack(AMBlockRegistry.BANANA_PEEL.get()));
             }
-            Entity itemThrower = e.getOwner();
-            if (itemThrower != null && !this.isTame()) {
-                if (getRandom().nextInt(5) == 0) {
-                    this.setTame(true);
-                    this.setOwnerUUID(itemThrower.getUUID());
-                    this.level().broadcastEntityEvent(this, (byte) 7);
-                } else {
-                    this.level().broadcastEntityEvent(this, (byte) 6);
-                }
+        }
+
+        Entity itemThrower = e.getOwner();
+        if (e.getItem().is(AMTagRegistry.CAPUCHIN_MONKEY_TAMEABLES) && itemThrower != null && !this.isTame()) {
+            if (getRandom().nextInt(5) == 0) {
+                this.setTame(true);
+                this.setOwnerUUID(itemThrower.getUUID());
+                this.level().broadcastEntityEvent(this, (byte) 7);
+            } else {
+                this.level().broadcastEntityEvent(this, (byte) 6);
             }
         }
     }

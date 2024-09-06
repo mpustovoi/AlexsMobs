@@ -6,6 +6,7 @@ import com.github.alexthe666.alexsmobs.entity.ai.GroundPathNavigatorWide;
 import com.github.alexthe666.alexsmobs.entity.ai.MovementControllerCustomCollisions;
 import com.github.alexthe666.alexsmobs.entity.util.Maths;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
+import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import com.github.alexthe666.citadel.server.entity.collision.ICustomCollisions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -72,7 +73,7 @@ public class EntityRockyRoller extends Monster implements ICustomCollisions {
 
 
     public static boolean checkRockyRollerSpawnRules(EntityType<? extends Monster> animal, ServerLevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return worldIn.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(worldIn, pos, random) && (worldIn.getBlockState(pos.below()).is(Blocks.POINTED_DRIPSTONE) || worldIn.getBlockState(pos.below()).isSolid() || worldIn.getBlockState(pos.below()).is(Blocks.DRIPSTONE_BLOCK));
+        return worldIn.getDifficulty() != Difficulty.PEACEFUL && isDarkEnoughToSpawn(worldIn, pos, random) && (worldIn.getBlockState(pos.below()).is(AMTagRegistry.ROCKY_ROLLER_SPAWNS) || worldIn.getBlockState(pos.below()).isSolid());
     }
 
 

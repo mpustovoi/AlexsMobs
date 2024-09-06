@@ -70,6 +70,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public class EntityLaviathan extends Animal implements ISemiAquatic, IHerdPanic {
 
@@ -183,7 +184,7 @@ public class EntityLaviathan extends Animal implements ISemiAquatic, IHerdPanic 
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.is(AMItemRegistry.MOSQUITO_LARVA.get());
+        return stack.is(AMTagRegistry.LAVIATHAN_BREEDABLES);
     }
 
     public boolean isPushable() {
@@ -197,7 +198,7 @@ public class EntityLaviathan extends Animal implements ISemiAquatic, IHerdPanic 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
-        if (item == Items.MAGMA_CREAM && this.getHealth() < this.getMaxHealth()) {
+        if (itemstack.is(AMTagRegistry.LAVIATHAN_FOODSTUFFS) && this.getHealth() < this.getMaxHealth()) {
             if (!player.isCreative()) {
                 itemstack.shrink(1);
             }
@@ -396,7 +397,7 @@ public class EntityLaviathan extends Animal implements ISemiAquatic, IHerdPanic 
             }
         });
         this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));;
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.of(Items.MAGMA_CREAM, AMItemRegistry.MOSQUITO_LARVA.get()), false));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.fromValues(Stream.of(new Ingredient.TagValue(AMTagRegistry.LAVIATHAN_BREEDABLES), new Ingredient.TagValue(AMTagRegistry.LAVIATHAN_FOODSTUFFS))), false));
         this.goalSelector.addGoal(4, new AnimalAIFindWaterLava(this, 1.0D));
         this.goalSelector.addGoal(5, new LaviathanAIRandomSwimming(this, 1.0D, 22) {
             @Override

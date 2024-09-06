@@ -4,7 +4,6 @@ import com.github.alexthe666.alexsmobs.block.AMBlockRegistry;
 import com.github.alexthe666.alexsmobs.block.BlockReptileEgg;
 import com.github.alexthe666.alexsmobs.config.AMConfig;
 import com.github.alexthe666.alexsmobs.entity.ai.*;
-import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -21,7 +20,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -98,7 +96,7 @@ public class EntityCaiman extends TamableAnimal implements ISemiAquatic,IFollowe
         this.goalSelector.addGoal(3, new BreathAirGoal(this));
         this.goalSelector.addGoal(4, new TameableAIFollowOwnerWater(this, 1.1D, 4.0F, 2.0F, false));
         this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.2F, false));
-        this.goalSelector.addGoal(6, new TemptGoal(this, 1.1D, Ingredient.of(AMItemRegistry.COOKED_CATFISH.get(), AMItemRegistry.RAW_CATFISH.get()), false));
+        this.goalSelector.addGoal(6, new TemptGoal(this, 1.1D, Ingredient.of(AMTagRegistry.CAIMAN_BREEDABLES), false));
         this.goalSelector.addGoal(7, new AnimalAIFindWater(this));
         this.goalSelector.addGoal(7, new AnimalAILeaveWater(this));
         this.goalSelector.addGoal(8, new CaimanAIBellow(this));
@@ -146,11 +144,11 @@ public class EntityCaiman extends TamableAnimal implements ISemiAquatic,IFollowe
 
     public static <T extends Mob> boolean canCaimanSpawn(EntityType type, LevelAccessor worldIn, MobSpawnType reason, BlockPos p_223317_3_, RandomSource random) {
         BlockState blockstate = worldIn.getBlockState(p_223317_3_.below());
-        return blockstate.is(Blocks.MUD) || blockstate.is(Blocks.MUDDY_MANGROVE_ROOTS) || blockstate.is(AMTagRegistry.CROCODILE_SPAWNS);
+        return blockstate.is(Blocks.MUD) || blockstate.is(Blocks.MUDDY_MANGROVE_ROOTS) || blockstate.is(AMTagRegistry.CAIMAN_SPAWNS);
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.is(AMItemRegistry.RAW_CATFISH.get()) || stack.is(AMItemRegistry.COOKED_CATFISH.get());
+        return stack.is(AMTagRegistry.CAIMAN_BREEDABLES);
     }
 
     private void switchNavigator(boolean onLand) {
@@ -261,7 +259,7 @@ public class EntityCaiman extends TamableAnimal implements ISemiAquatic,IFollowe
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         InteractionResult type = super.mobInteract(player, hand);
-        if (isTame() && itemstack.is(ItemTags.FISHES) && this.getHealth() < this.getMaxHealth()) {
+        if (isTame() && itemstack.is(AMTagRegistry.CAIMAN_FOODSTUFFS) && this.getHealth() < this.getMaxHealth()) {
             this.usePlayerItem(player, hand, itemstack);
             this.gameEvent(GameEvent.EAT);
             this.playSound(SoundEvents.CAT_EAT, this.getSoundVolume(), this.getVoicePitch());

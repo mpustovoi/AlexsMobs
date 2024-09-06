@@ -634,7 +634,7 @@ public class EntityCrocodile extends TamableAnimal implements IAnimatedEntity, I
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.getItem() == Items.ROTTEN_FLESH;
+        return stack.is(AMTagRegistry.CROCODILE_BREEDABLES);
     }
 
     @Override

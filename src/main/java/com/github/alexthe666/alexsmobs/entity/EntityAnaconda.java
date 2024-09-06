@@ -123,7 +123,7 @@ public class EntityAnaconda extends Animal implements ISemiAquatic {
         this.goalSelector.addGoal(2, new AIMelee());
         this.goalSelector.addGoal(3, new AnimalAIFindWater(this));
         this.goalSelector.addGoal(3, new AnimalAILeaveWater(this));
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.25D, Ingredient.of(Items.CHICKEN, Items.COOKED_CHICKEN), false));
+        this.goalSelector.addGoal(4, new TemptGoal(this, 1.25D, Ingredient.of(AMTagRegistry.ANACONDA_FOODSTUFFS), false));
         this.goalSelector.addGoal(5, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(7, new AnimalAIWanderRanged(this, 60, 1.0D, 14, 7));
@@ -436,7 +436,7 @@ public class EntityAnaconda extends Animal implements ISemiAquatic {
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.getItem() == Items.CHICKEN || stack.getItem() == Items.COOKED_CHICKEN;
+        return stack.is(AMTagRegistry.ANACONDA_FOODSTUFFS);
     }
 
     public void travel(Vec3 travelVector) {

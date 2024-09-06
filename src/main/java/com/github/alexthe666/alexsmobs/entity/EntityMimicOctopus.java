@@ -66,6 +66,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class EntityMimicOctopus extends TamableAnimal implements ISemiAquatic, IFollower, Bucketable {
 
@@ -271,7 +272,7 @@ public class EntityMimicOctopus extends TamableAnimal implements ISemiAquatic, I
         this.goalSelector.addGoal(2, new TameableAIFollowOwnerWater(this, 1.3D, 4.0F, 2.0F, false));
         this.goalSelector.addGoal(3, new AnimalAIFindWater(this));
         this.goalSelector.addGoal(3, new AnimalAILeaveWater(this));
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(AMItemRegistry.LOBSTER_TAIL.get(), AMItemRegistry.COOKED_LOBSTER_TAIL.get(), Items.TROPICAL_FISH), false) {
+        this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.fromValues(Stream.of(new Ingredient.TagValue(AMTagRegistry.MIMIC_OCTOPUS_BREEDABLES), new Ingredient.TagValue(AMTagRegistry.MIMIC_OCTOPUS_TAMEABLES))), false) {
             @Override
             public void tick() {
                 EntityMimicOctopus.this.setMimickedBlock(null);
@@ -299,7 +300,7 @@ public class EntityMimicOctopus extends TamableAnimal implements ISemiAquatic, I
 
     public boolean isFood(ItemStack stack) {
         Item item = stack.getItem();
-        return isTame() && (item == Items.TROPICAL_FISH);
+        return isTame() && stack.is(AMTagRegistry.MIMIC_OCTOPUS_BREEDABLES);
     }
 
     public boolean isActiveCamo() {
@@ -332,7 +333,7 @@ public class EntityMimicOctopus extends TamableAnimal implements ISemiAquatic, I
             return InteractionResult.SUCCESS;
         }
         final boolean tame = isTame();
-        if (tame && (item == Items.INK_SAC)) {
+        if (tame && itemstack.is(AMTagRegistry.MIMIC_OCTOPUS_TOGGLES_MIMIC)) {
             this.setStopChange(!this.isStopChange());
             if (this.isStopChange()) {
                 this.makeEatingParticles(itemstack);
@@ -342,7 +343,7 @@ public class EntityMimicOctopus extends TamableAnimal implements ISemiAquatic, I
             }
             return InteractionResult.SUCCESS;
         }
-        if (!tame && (item == AMItemRegistry.LOBSTER_TAIL.get() || item == AMItemRegistry.COOKED_LOBSTER_TAIL.get())) {
+        if (!tame && itemstack.is(AMTagRegistry.MIMIC_OCTOPUS_TAMEABLES)) {
             this.usePlayerItem(player, hand, itemstack);
             this.gameEvent(GameEvent.EAT);
             this.playSound(SoundEvents.DOLPHIN_EAT, this.getSoundVolume(), this.getVoicePitch());
@@ -357,7 +358,7 @@ public class EntityMimicOctopus extends TamableAnimal implements ISemiAquatic, I
             }
             return InteractionResult.SUCCESS;
         }
-        if (tame && (item == AMItemRegistry.LOBSTER_TAIL.get() || item == AMItemRegistry.COOKED_LOBSTER_TAIL.get())) {
+        if (tame && itemstack.is(AMTagRegistry.MIMIC_OCTOPUS_TAMEABLES)) {
             if (this.getHealth() < this.getMaxHealth()) {
                 this.usePlayerItem(player, hand, itemstack);
                 this.gameEvent(GameEvent.EAT);
@@ -373,14 +374,14 @@ public class EntityMimicOctopus extends TamableAnimal implements ISemiAquatic, I
                 return result.get();
             }
 
-            if (item == Items.SLIME_BALL && this.getMoistness() < 24000) {
+            if (itemstack.is(AMTagRegistry.MIMIC_OCTOPUS_MOISTURIZES) && this.getMoistness() < 24000) {
                 this.setMoistness(48000);
                 this.makeEatingParticles(itemstack);
                 this.usePlayerItem(player, hand, itemstack);
                 return InteractionResult.SUCCESS;
             }
 
-            if (!this.isUpgraded() && item == AMItemRegistry.MIMICREAM.get()) {
+            if (!this.isUpgraded() && itemstack.is(AMTagRegistry.MIMIC_OCTOPUS_ATTACK_FOODS)) {
                 mimicreamFeedings++;
                 if (mimicreamFeedings > 5 || mimicreamFeedings > 2 && random.nextInt(2) == 0) {
                     this.level().broadcastEntityEvent(this, (byte) 46);

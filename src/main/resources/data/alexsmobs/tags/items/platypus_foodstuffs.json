@@ -1,13 +1,11 @@
 {
+  "__comment": "Will follow with these items in your hand",
   "replace": false,
   "values": [
-    "minecraft:redstone",
-    "minecraft:redstone_block",
-    "alexsmobs:mosquito_larva",
-    "alexsmobs:maggot",
-    "alexsmobs:mosquito_larva",
-    "#minecraft:fishes",
-    "alexsmobs:lobster_tail",
-    "alexsmobs:cooked_lobster_tail"
+    "#alexsmobs:platypus_breedables",
+    "#alexsmobs:platypus_chargeables",
+    "#alexsmobs:platypus_super_chargeables",
+    "#alexsmobs:insect_items",
+    "#minecraft:fishes"
   ]
 }

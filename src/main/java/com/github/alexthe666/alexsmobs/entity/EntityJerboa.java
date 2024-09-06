@@ -33,7 +33,6 @@ import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.Ocelot;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -44,7 +43,6 @@ import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nullable;
 
@@ -222,8 +220,7 @@ public class EntityJerboa extends Animal {
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        Item item = itemstack.getItem();
-        if ((itemstack.is(Tags.Items.SEEDS) || isFood(itemstack)) && (this.getHealth() < this.getMaxHealth() || !this.isBefriended())) {
+        if ((itemstack.is(AMTagRegistry.JERBOA_BEGS_FOR) || isFood(itemstack)) && (this.getHealth() < this.getMaxHealth() || !this.isBefriended())) {
             if (!player.isCreative()) {
                 itemstack.shrink(1);
             }
@@ -232,7 +229,7 @@ public class EntityJerboa extends Animal {
             return InteractionResult.SUCCESS;
         }
         InteractionResult type = super.mobInteract(player, hand);
-        if (type != InteractionResult.SUCCESS && !isFood(itemstack) && itemstack.is(Tags.Items.SEEDS)) {
+        if (type != InteractionResult.SUCCESS && !isFood(itemstack) && itemstack.is(AMTagRegistry.JERBOA_BEGS_FOR)) {
             this.setSleeping(false);
             this.gameEvent(GameEvent.ENTITY_INTERACT);
             this.playSound(SoundEvents.PARROT_EAT, this.getVoicePitch(), this.getSoundVolume());
@@ -268,7 +265,7 @@ public class EntityJerboa extends Animal {
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.is(AMTagRegistry.INSECT_ITEMS);
+        return stack.is(AMTagRegistry.JERBOA_BREEDABLES);
     }
 
     public boolean shouldMove() {

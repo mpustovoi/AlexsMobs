@@ -65,6 +65,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public class EntitySugarGlider extends TamableAnimal implements IFollower {
 
@@ -121,7 +122,7 @@ public class EntitySugarGlider extends TamableAnimal implements IFollower {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new SitWhenOrderedToGoal(this));
         this.goalSelector.addGoal(2, new FlyingAIFollowOwner(this, 1.0D, 5.0F, 2.0F, true));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.of(Items.SWEET_BERRIES, Items.HONEYCOMB), false){
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.fromValues(Stream.of(new Ingredient.TagValue(AMTagRegistry.SUGAR_GLIDER_BREEDABLES), new Ingredient.TagValue(AMTagRegistry.SUGAR_GLIDER_TAMEABLES))), false){
             public void start(){
                 super.start();
                 EntitySugarGlider.this.entityData.set(ATTACHED_FACE, Direction.DOWN);
@@ -164,7 +165,7 @@ public class EntitySugarGlider extends TamableAnimal implements IFollower {
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.is(Items.HONEYCOMB);
+        return stack.is(AMTagRegistry.SUGAR_GLIDER_BREEDABLES);
     }
 
     protected SoundEvent getAmbientSound() {
@@ -476,7 +477,7 @@ public class EntitySugarGlider extends TamableAnimal implements IFollower {
         ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
         InteractionResult type = super.mobInteract(player, hand);
-        if (!isTame() && itemstack.is(Items.SWEET_BERRIES)) {
+        if (!isTame() && itemstack.is(AMTagRegistry.SUGAR_GLIDER_TAMEABLES)) {
             this.usePlayerItem(player, hand, itemstack);
             this.gameEvent(GameEvent.EAT);
             this.playSound(SoundEvents.FOX_EAT, this.getSoundVolume(), this.getVoicePitch());

@@ -2,6 +2,7 @@ package com.github.alexthe666.alexsmobs.entity;
 
 import com.github.alexthe666.alexsmobs.entity.ai.CreatureAITargetItems;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
+import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import com.github.alexthe666.citadel.animation.Animation;
 import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.github.alexthe666.citadel.animation.IAnimatedEntity;
@@ -80,7 +81,7 @@ public class EntityTasmanianDevil extends Animal implements IAnimatedEntity, ITa
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.5D, true));
-        this.goalSelector.addGoal(2, new TemptGoal(this, 1.1D, Ingredient.of(Items.ROTTEN_FLESH), false){
+        this.goalSelector.addGoal(2, new TemptGoal(this, 1.1D, Ingredient.of(AMTagRegistry.TASMANIAN_DEVIL_HOWLING_FOODS), false){
             public void tick(){
                 super.tick();
                 if(EntityTasmanianDevil.this.getAnimation() == NO_ANIMATION){
@@ -148,7 +149,7 @@ public class EntityTasmanianDevil extends Animal implements IAnimatedEntity, ITa
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.getItem().isEdible() && stack.getItem().getFoodProperties() != null && stack.getItem().getFoodProperties().isMeat() && stack.getItem() != Items.ROTTEN_FLESH;
+        return stack.getItem().isEdible() && stack.getItem().getFoodProperties() != null && stack.getItem().getFoodProperties().isMeat() && !stack.is(AMTagRegistry.TASMANIAN_DEVIL_HOWLING_FOODS);
     }
 
     public void tick(){
@@ -233,7 +234,7 @@ public class EntityTasmanianDevil extends Animal implements IAnimatedEntity, ITa
         ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
         InteractionResult type = super.mobInteract(player, hand);
-        if (item == Items.ROTTEN_FLESH && this.getAnimation() != ANIMATION_HOWL) {
+        if (itemstack.is(AMTagRegistry.TASMANIAN_DEVIL_HOWLING_FOODS) && this.getAnimation() != ANIMATION_HOWL) {
             this.gameEvent(GameEvent.EAT);
             this.playSound(SoundEvents.FOX_EAT, this.getSoundVolume(), this.getVoicePitch());
             this.spawnAtLocation(item.getCraftingRemainingItem(itemstack));

@@ -3,9 +3,9 @@ package com.github.alexthe666.alexsmobs.entity;
 import com.github.alexthe666.alexsmobs.config.AMConfig;
 import com.github.alexthe666.alexsmobs.entity.ai.*;
 import com.github.alexthe666.alexsmobs.entity.util.Maths;
-import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMBlockPos;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
+import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import com.google.common.base.Predicates;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -35,7 +35,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -112,7 +111,7 @@ public class EntityCosmaw extends TamableAnimal implements ITargetsDroppedItems,
         this.goalSelector.addGoal(3, new FlyingAIFollowOwner(this, 1.3D, 8.0F, 4.0F, false));
         this.goalSelector.addGoal(4, new AIPickupOwner());
         this.goalSelector.addGoal(5, new BreedGoal(this, 1.2D));
-        this.goalSelector.addGoal(6, new AnimalAITemptDistance(this, 1.1D, Ingredient.of(Items.CHORUS_FRUIT, AMItemRegistry.COSMIC_COD.get()), false, 25) {
+        this.goalSelector.addGoal(6, new AnimalAITemptDistance(this, 1.1D, Ingredient.of(AMTagRegistry.COSMAW_FOODSTUFFS), false, 25) {
             public boolean canUse() {
                 return super.canUse() && EntityCosmaw.this.getMainHandItem().isEmpty();
             }
@@ -151,7 +150,7 @@ public class EntityCosmaw extends TamableAnimal implements ITargetsDroppedItems,
     }
 
     public boolean isFood(ItemStack stack) {
-        return this.isTame() && stack.is(AMItemRegistry.COSMIC_COD.get());
+        return this.isTame() && stack.is(AMTagRegistry.COSMAW_BREEDABLES);
     }
 
     public boolean isNoGravity() {
@@ -274,7 +273,7 @@ public class EntityCosmaw extends TamableAnimal implements ITargetsDroppedItems,
                 this.heal(4);
                 this.gameEvent(GameEvent.EAT);
                 this.playSound(SoundEvents.DOLPHIN_EAT, this.getSoundVolume(), this.getVoicePitch());
-                if (this.getMainHandItem().getItem() == AMItemRegistry.COSMIC_COD.get() && fishThrowerID != null && !this.isTame()) {
+                if (this.getMainHandItem().is(AMTagRegistry.COSMAW_TAMEABLES) && fishThrowerID != null && !this.isTame()) {
                     if (getRandom().nextFloat() < 0.3F) {
                         this.setTame(true);
                         this.setCommand(1);
@@ -351,7 +350,7 @@ public class EntityCosmaw extends TamableAnimal implements ITargetsDroppedItems,
             rippedStack.setCount(1);
             stack.shrink(1);
             this.setItemInHand(InteractionHand.MAIN_HAND, rippedStack);
-            if (rippedStack.getItem() == AMItemRegistry.COSMIC_COD.get()) {
+            if (rippedStack.is(AMTagRegistry.COSMAW_TAMEABLES)) {
                 fishThrowerID = player.getUUID();
             }
             return InteractionResult.SUCCESS;
@@ -425,7 +424,7 @@ public class EntityCosmaw extends TamableAnimal implements ITargetsDroppedItems,
 
     @Override
     public boolean canTargetItem(ItemStack stack) {
-        return stack.getItem() == AMItemRegistry.COSMIC_COD.get() || stack.getItem() == Items.CHORUS_FRUIT;
+        return stack.is(AMTagRegistry.COSMAW_FOODSTUFFS);
     }
 
     @Override
@@ -437,7 +436,7 @@ public class EntityCosmaw extends TamableAnimal implements ITargetsDroppedItems,
         }
         this.setItemInHand(InteractionHand.MAIN_HAND, duplicate);
         Entity itemThrower = e.getOwner();
-        if (e.getItem().getItem() == Items.PUMPKIN_SEEDS && !this.isTame() && itemThrower != null) {
+        if (e.getItem().is(AMTagRegistry.COSMAW_TAMEABLES) && !this.isTame() && itemThrower != null) {
             fishThrowerID = itemThrower.getUUID();
         } else {
             fishThrowerID = null;

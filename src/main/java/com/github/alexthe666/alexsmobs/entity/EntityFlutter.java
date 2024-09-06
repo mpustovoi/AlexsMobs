@@ -6,6 +6,7 @@ import com.github.alexthe666.alexsmobs.entity.util.Maths;
 import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMBlockPos;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
+import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -46,6 +47,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
@@ -110,14 +112,14 @@ public class EntityFlutter extends TamableAnimal implements IFollower, FlyingAni
 
     public static <T extends Mob> boolean canFlutterSpawn(EntityType<EntityFlutter> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
         BlockState blockstate = iServerWorld.getBlockState(pos.below());
-        return reason == MobSpawnType.SPAWNER || !iServerWorld.canSeeSky(pos) && blockstate.is(Blocks.MOSS_BLOCK) && pos.getY() <= 64 && canFlutterSpawnInLight(entityType, iServerWorld, reason, pos, random);
+        return reason == MobSpawnType.SPAWNER || !iServerWorld.canSeeSky(pos) && blockstate.is(AMTagRegistry.FLUTTER_SPAWNS) && pos.getY() <= 64 && canFlutterSpawnInLight(entityType, iServerWorld, reason, pos, random);
     }
 
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new FlyAwayFromTarget(this));
-        this.goalSelector.addGoal(2, new TameableAITempt(this, 1.1D, Ingredient.of(Items.BONE_MEAL), false) {
+        this.goalSelector.addGoal(2, new TameableAITempt(this, 1.1D, Ingredient.of(AMTagRegistry.FLUTTER_BREEDABLES), false) {
             @Override
             public boolean shouldFollowAM(LivingEntity le) {
                 return EntityFlutter.this.canEatFlower(le.getMainHandItem()) || EntityFlutter.this.canEatFlower(le.getOffhandItem()) || super.shouldFollowAM(le);
@@ -363,7 +365,7 @@ public class EntityFlutter extends TamableAnimal implements IFollower, FlyingAni
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.getItem() == Items.BONE_MEAL && this.isTame();
+        return stack.is(AMTagRegistry.FLUTTER_BREEDABLES) && this.isTame();
     }
 
 
@@ -418,7 +420,7 @@ public class EntityFlutter extends TamableAnimal implements IFollower, FlyingAni
             if (item == Items.FLOWER_POT && !this.isPotted()) {
                 this.setPotted(true);
                 return InteractionResult.SUCCESS;
-            } else if (item == Items.SHEARS && this.isPotted()) {
+            } else if (itemstack.is(Tags.Items.SHEARS) && this.isPotted()) {
                 this.setPotted(false);
                 this.spawnAtLocation(Items.FLOWER_POT);
                 return InteractionResult.SUCCESS;

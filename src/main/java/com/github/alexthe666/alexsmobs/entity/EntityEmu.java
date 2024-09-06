@@ -31,7 +31,7 @@ import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Pillager;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -120,7 +120,7 @@ public class EntityEmu extends Animal implements IAnimatedEntity, IHerdPanic {
         this.goalSelector.addGoal(2, new AnimalAIHerdPanic(this, 1.5D));
         this.goalSelector.addGoal(3, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.1D, Ingredient.of(Items.WHEAT), false));
+        this.goalSelector.addGoal(4, new TemptGoal(this, 1.1D, Ingredient.of(AMTagRegistry.EMU_BREEDABLES), false));
         this.goalSelector.addGoal(5, new AnimalAIWanderRanged(this, 110, 1.0D, 10, 7));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 15.0F));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
@@ -129,6 +129,10 @@ public class EntityEmu extends Animal implements IAnimatedEntity, IHerdPanic {
             this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, AbstractSkeleton.class, false));
             this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Pillager.class, false));
         }
+    }
+
+    public boolean isFood(ItemStack stack) {
+        return stack.is(AMTagRegistry.EMU_BREEDABLES);
     }
 
     public boolean canAttack(LivingEntity target) {

@@ -39,7 +39,6 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -417,7 +416,7 @@ public class EntityBunfungus extends PathfinderMob implements IAnimatedEntity {
     }
 
     public boolean isCarrot(ItemStack stack) {
-        return stack.getItem() == Items.CARROT || stack.getItem() == Items.GOLDEN_CARROT;
+        return stack.is(AMTagRegistry.BUNFUNGUS_FOODSTUFFS);
     }
 
     public boolean defendsMungusAgainst(LivingEntity lastHurtByMob) {

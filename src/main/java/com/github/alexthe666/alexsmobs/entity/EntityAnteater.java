@@ -97,7 +97,7 @@ public class EntityAnteater extends Animal implements NeutralMob, IAnimatedEntit
         this.goalSelector.addGoal(3, new AnteaterAIRaidNest(this));
         this.goalSelector.addGoal(4, new BreedGoal(this, 1D));
         this.goalSelector.addGoal(5, new AnimalAIRideParent(this, 1.25D));
-        this.goalSelector.addGoal(6, new TemptGoal(this, 1.2D, Ingredient.of(AMTagRegistry.INSECT_ITEMS), false));
+        this.goalSelector.addGoal(6, new TemptGoal(this, 1.2D, Ingredient.of(AMTagRegistry.ANTEATER_FOODSTUFFS), false));
         this.goalSelector.addGoal(7, new AnimalAIWanderRanged(this, 110, 1.0D, 10, 7));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 10.0F));
         this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
@@ -132,7 +132,7 @@ public class EntityAnteater extends Animal implements NeutralMob, IAnimatedEntit
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.getItem() == AMItemRegistry.LEAFCUTTER_ANT_PUPA.get();
+        return stack.is(AMTagRegistry.ANTEATER_BREEDABLES);
     }
 
     @Override
@@ -211,15 +211,14 @@ public class EntityAnteater extends Animal implements NeutralMob, IAnimatedEntit
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         final ItemStack itemstack = player.getItemInHand(hand);
         final InteractionResult type = super.mobInteract(player, hand);
-        final boolean isInsect = itemstack.is(AMTagRegistry.INSECT_ITEMS);
-        if (isInsect) {
-            final Item item = itemstack.getItem();
+        final boolean isFoodstuff = itemstack.is(AMTagRegistry.ANTEATER_FOODSTUFFS);
+        if (isFoodstuff) {
             final ItemStack rippedStack = itemstack.copy();
             rippedStack.setCount(1);
             this.stopBeingAngry();
             this.heal(4);
             this.setItemInHand(InteractionHand.MAIN_HAND, rippedStack);
-            if (item == AMItemRegistry.LEAFCUTTER_ANT_PUPA.get()) {
+            if (itemstack.is(AMTagRegistry.ANTEATER_BREEDABLES)) {
                 return type;
             }
             this.usePlayerItem(player, hand, itemstack);

@@ -5,6 +5,7 @@ import com.github.alexthe666.alexsmobs.entity.ai.AnimalAIWanderRanged;
 import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMBlockPos;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
+import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -31,7 +32,6 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -136,7 +136,7 @@ public class EntityBananaSlug extends Animal {
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.is(Items.BROWN_MUSHROOM);
+        return stack.is(AMTagRegistry.BANANA_SLUG_BREEDABLES);
     }
 
     public void setBesideClimbableBlock(boolean climbing) {
@@ -156,7 +156,7 @@ public class EntityBananaSlug extends Animal {
 
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new FloatGoal(this));
-        this.goalSelector.addGoal(2, new TemptGoal(this, 1.0D, Ingredient.of(Items.BROWN_MUSHROOM), false));
+        this.goalSelector.addGoal(2, new TemptGoal(this, 1.0D, Ingredient.of(AMTagRegistry.BANANA_SLUG_BREEDABLES), false));
         this.goalSelector.addGoal(3, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(4, new AnimalAIWanderRanged(this, 40, 1.0D, 10, 7));
         this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 5.0F));
