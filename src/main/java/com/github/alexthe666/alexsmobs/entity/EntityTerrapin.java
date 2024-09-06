@@ -7,6 +7,7 @@ import com.github.alexthe666.alexsmobs.entity.ai.*;
 import com.github.alexthe666.alexsmobs.entity.util.TerrapinTypes;
 import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
+import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import com.github.alexthe666.alexsmobs.tileentity.TileEntityTerrapinEgg;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -40,10 +41,8 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluids;
@@ -117,7 +116,7 @@ public class EntityTerrapin extends Animal implements ISemiAquatic, Bucketable {
         this.goalSelector.addGoal(0, new BreathAirGoal(this));
         this.goalSelector.addGoal(1, new MateGoal(this, 1.0D));
         this.goalSelector.addGoal(1, new LayEggGoal(this, 1.0D));
-        this.goalSelector.addGoal(2, new TemptGoal(this, 1.1D, Ingredient.of(Items.SEAGRASS), false));
+        this.goalSelector.addGoal(2, new TemptGoal(this, 1.1D, Ingredient.of(AMTagRegistry.TERRAPIN_BREEDABLES), false));
         this.goalSelector.addGoal(3, new AnimalAIFindWater(this));
         this.goalSelector.addGoal(3, new AnimalAILeaveWater(this));
         this.goalSelector.addGoal(4, new SemiAquaticAIRandomSwimming(this, 1.0D, 30));
@@ -301,7 +300,7 @@ public class EntityTerrapin extends Animal implements ISemiAquatic, Bucketable {
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.getItem() == Blocks.SEAGRASS.asItem();
+        return stack.is(AMTagRegistry.TERRAPIN_BREEDABLES);
     }
 
     @Override
@@ -561,7 +560,7 @@ public class EntityTerrapin extends Animal implements ISemiAquatic, Bucketable {
     @Nonnull
     public InteractionResult mobInteract(@Nonnull Player player, @Nonnull InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        if (itemstack.getItem() == Items.SEAGRASS){
+        if (itemstack.is(AMTagRegistry.TERRAPIN_BREEDABLES)){
             this.setPersistenceRequired();
         }
         return Bucketable.bucketMobPickup(player, hand, this).orElse(super.mobInteract(player, hand));

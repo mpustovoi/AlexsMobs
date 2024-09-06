@@ -1,6 +1,7 @@
 package com.github.alexthe666.alexsmobs.entity.ai;
 
 import com.github.alexthe666.alexsmobs.entity.EntityPlatypus;
+import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -12,7 +13,6 @@ import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -60,7 +60,7 @@ public class PlatypusAIDigForItems extends Goal {
     }
 
     public boolean canContinueToUse() {
-        return platypus.getTarget() == null && platypus.isSensing() && platypus.getLastHurtByMob() == null && digPos != null && platypus.level().getBlockState(digPos).getBlock() == Blocks.CLAY && platypus.level().getFluidState(digPos.above()).is(FluidTags.WATER);
+        return platypus.getTarget() == null && platypus.isSensing() && platypus.getLastHurtByMob() == null && digPos != null && platypus.level().getBlockState(digPos).is(AMTagRegistry.PLATYPUS_DIGABLES) && platypus.level().getFluidState(digPos.above()).is(FluidTags.WATER);
     }
 
     public void tick() {
@@ -124,7 +124,7 @@ public class PlatypusAIDigForItems extends Goal {
                 seafloor = seafloor.below();
             }
             BlockState state = world.getBlockState(seafloor);
-            if (state.getBlock() == Blocks.CLAY) {
+            if (state.is(AMTagRegistry.PLATYPUS_DIGABLES)) {
                 return seafloor;
             }
         }

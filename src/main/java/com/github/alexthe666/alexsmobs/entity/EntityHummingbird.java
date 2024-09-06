@@ -7,6 +7,7 @@ import com.github.alexthe666.alexsmobs.entity.ai.HummingbirdAIPollinate;
 import com.github.alexthe666.alexsmobs.entity.ai.HummingbirdAIWander;
 import com.github.alexthe666.alexsmobs.misc.AMPointOfInterestRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
+import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import com.google.common.base.Predicates;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
@@ -17,8 +18,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -105,7 +104,7 @@ public class EntityHummingbird extends Animal {
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.is(ItemTags.FLOWERS);
+        return stack.is(AMTagRegistry.HUMMINGBIRD_BREEDABLES);
     }
 
     public int getMaxSpawnClusterSize() {
@@ -119,7 +118,7 @@ public class EntityHummingbird extends Animal {
 
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new BreedGoal(this, 1));
-        this.goalSelector.addGoal(2, new TemptGoal(this, 1, Ingredient.of(ItemTags.FLOWERS), false));
+        this.goalSelector.addGoal(2, new TemptGoal(this, 1, Ingredient.of(AMTagRegistry.HUMMINGBIRD_BREEDABLES), false));
         this.goalSelector.addGoal(3, new FollowParentGoal(this, 1));
         this.goalSelector.addGoal(4, new AIUseFeeder(this));
         this.goalSelector.addGoal(4, new HummingbirdAIPollinate(this));
@@ -322,7 +321,7 @@ public class EntityHummingbird extends Animal {
 
     public static <T extends Mob> boolean canHummingbirdSpawn(EntityType<EntityHummingbird> hummingbird, LevelAccessor worldIn, MobSpawnType reason, BlockPos p_223317_3_, RandomSource random) {
         BlockState blockstate = worldIn.getBlockState(p_223317_3_.below());
-        return (blockstate.is(BlockTags.LEAVES) || blockstate.is(Blocks.GRASS_BLOCK) || blockstate.is(BlockTags.LOGS) || blockstate.is(Blocks.AIR)) && worldIn.getRawBrightness(p_223317_3_, 0) > 8;
+        return (blockstate.is(AMTagRegistry.HUMMINGBIRD_SPAWNS) || blockstate.is(Blocks.AIR)) && worldIn.getRawBrightness(p_223317_3_, 0) > 8;
     }
 
     public boolean canBlockBeSeen(BlockPos pos) {

@@ -222,7 +222,7 @@ public class EntityKangaroo extends TamableAnimal implements ContainerListener, 
         ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
         InteractionResult type = super.mobInteract(player, hand);
-        if (!isTame() && item == Items.CARROT) {
+        if (!isTame() && itemstack.is(AMTagRegistry.KANGAROO_TAMEABLES)) {
             this.usePlayerItem(player, hand, itemstack);
             this.gameEvent(GameEvent.EAT);
             this.playSound(SoundEvents.HORSE_EAT, this.getSoundVolume(), this.getVoicePitch());
@@ -402,7 +402,7 @@ public class EntityKangaroo extends TamableAnimal implements ContainerListener, 
         this.goalSelector.addGoal(2, new TameableAIFollowOwner(this, 1.2D, 5.0F, 2.0F, false));
         this.goalSelector.addGoal(3, new BreedGoal(this, 1D));
         this.goalSelector.addGoal(4, new AnimalAIRideParent(this, 1.25D));
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.2D, Ingredient.of(Items.CARROT), false));
+        this.goalSelector.addGoal(4, new TemptGoal(this, 1.2D, Ingredient.of(AMTagRegistry.KANGAROO_TAMEABLES), false));
         this.goalSelector.addGoal(5, new AnimalAIWanderRanged(this, 110, 1.2D, 10, 7));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 10.0F));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
@@ -806,7 +806,7 @@ public class EntityKangaroo extends TamableAnimal implements ContainerListener, 
 
     public boolean isFood(ItemStack stack) {
         Item item = stack.getItem();
-        return item == Items.DEAD_BUSH || item == Items.GRASS;
+        return stack.is(AMTagRegistry.KANGAROO_BREEDABLES);
     }
 
     public void resetKangarooSlots() {

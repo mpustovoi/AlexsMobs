@@ -1,12 +1,10 @@
 {
   "replace": false,
   "values": [
-    "minecraft:egg",
-    "minecraft:turtle_egg",
-    "alexsmobs:crocodile_egg",
-    "alexsmobs:terrapin_egg",
-    "alexsmobs:caiman_egg",
+    "#forge:eggs",
     "minecraft:sugar",
-    "#forge:seeds"
+    "#forge:seeds",
+    "#alexsmobs:crow_breedables",
+    "#alexsmobs:crow_breedables"
   ]
 }

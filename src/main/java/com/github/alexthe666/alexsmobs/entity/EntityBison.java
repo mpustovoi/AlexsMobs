@@ -6,6 +6,7 @@ import com.github.alexthe666.alexsmobs.entity.ai.AnimalAIPanicBaby;
 import com.github.alexthe666.alexsmobs.entity.ai.AnimalAIWanderRanged;
 import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
+import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import com.github.alexthe666.citadel.animation.Animation;
 import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.github.alexthe666.citadel.animation.IAnimatedEntity;
@@ -123,7 +124,7 @@ public class EntityBison extends Animal implements IAnimatedEntity, Shearable, n
         this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1D, true));
         this.goalSelector.addGoal(3, new AnimalAIPanicBaby(this, 1.25D));
         this.goalSelector.addGoal(4, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(Items.WHEAT), false));
+        this.goalSelector.addGoal(4, new TemptGoal(this, 1.0D, Ingredient.of(AMTagRegistry.BISON_BREEDABLES), false));
         this.goalSelector.addGoal(5, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(6, new AIChargeFurthest());
         this.goalSelector.addGoal(7, new AnimalAIWanderRanged(this, 70, 1.0D, 18, 7));
@@ -133,6 +134,11 @@ public class EntityBison extends Animal implements IAnimatedEntity, Shearable, n
         this.targetSelector.addGoal(2, (new AnimalAIHurtByTargetNotBaby(this)));
 
     }
+
+    public boolean isFood(ItemStack stack) {
+        return stack.is(AMTagRegistry.BISON_BREEDABLES);
+    }
+
 
     @Override
     protected void defineSynchedData() {

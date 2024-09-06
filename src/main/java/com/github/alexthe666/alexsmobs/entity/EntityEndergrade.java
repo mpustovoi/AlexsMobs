@@ -6,9 +6,9 @@ import com.github.alexthe666.alexsmobs.entity.ai.DirectPathNavigator;
 import com.github.alexthe666.alexsmobs.entity.ai.EndergradeAIBreakFlowers;
 import com.github.alexthe666.alexsmobs.entity.ai.EndergradeAITargetItems;
 import com.github.alexthe666.alexsmobs.entity.util.Maths;
-import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMBlockPos;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
+import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -108,7 +108,7 @@ public class EntityEndergrade extends Animal implements FlyingAnimal {
                 EntityEndergrade.this.stopWandering = false;
             }
         });
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.of(Items.CHORUS_FRUIT), false) {
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.1D, Ingredient.of(AMTagRegistry.ENDERGRADE_BREEDABLES), false) {
             public void start() {
                 super.start();
                 EntityEndergrade.this.stopWandering = true;
@@ -130,7 +130,7 @@ public class EntityEndergrade extends Animal implements FlyingAnimal {
         for (Entity passenger : this.getPassengers()) {
             if (passenger instanceof Player) {
                 Player player = (Player) passenger;
-                if (player.getMainHandItem().getItem() == AMItemRegistry.CHORUS_ON_A_STICK.get() || player.getOffhandItem().getItem() == AMItemRegistry.CHORUS_ON_A_STICK.get()) {
+                if (player.getMainHandItem().is(AMTagRegistry.ENDERGRADE_FOLLOWS) || player.getOffhandItem().is(AMTagRegistry.ENDERGRADE_FOLLOWS)) {
                     return player;
                 }
             }
@@ -155,7 +155,7 @@ public class EntityEndergrade extends Animal implements FlyingAnimal {
             this.setSaddled(true);
             return InteractionResult.SUCCESS;
         }
-        if (item == Items.CHORUS_FRUIT && this.hasEffect(AMEffectRegistry.ENDER_FLU.get())) {
+        if (itemstack.is(AMTagRegistry.ENDERGRADE_BREEDABLES) && this.hasEffect(AMEffectRegistry.ENDER_FLU.get())) {
             if (!player.isCreative()) {
                 itemstack.shrink(1);
             }
@@ -174,7 +174,7 @@ public class EntityEndergrade extends Animal implements FlyingAnimal {
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.getItem() == Items.CHORUS_FRUIT;
+        return stack.is(AMTagRegistry.ENDERGRADE_BREEDABLES);
     }
 
     public void positionRider(Entity passenger, Entity.MoveFunction moveFunc) {
@@ -253,7 +253,7 @@ public class EntityEndergrade extends Animal implements FlyingAnimal {
     }
 
     public boolean canTargetItem(ItemStack stack) {
-        return stack.getItem() == Items.CHORUS_FRUIT || stack.getItem() == Items.CHORUS_FLOWER;
+        return stack.is(AMTagRegistry.ENDERGRADE_FOODSTUFFS);
     }
 
     public void onGetItem(ItemEntity targetEntity) {

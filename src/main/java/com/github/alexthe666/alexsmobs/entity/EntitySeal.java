@@ -1,7 +1,6 @@
 package com.github.alexthe666.alexsmobs.entity;
 
 import com.github.alexthe666.alexsmobs.entity.ai.*;
-import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import net.minecraft.ChatFormatting;
@@ -16,7 +15,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -47,6 +45,7 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 public class EntitySeal extends Animal implements ISemiAquatic, IHerdPanic, ITargetsDroppedItems {
 
@@ -118,7 +117,7 @@ public class EntitySeal extends Animal implements ISemiAquatic, IHerdPanic, ITar
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(9, new AvoidEntityGoal(this, EntityOrca.class, 20F, 1.3D, 1.0D));
-        this.goalSelector.addGoal(10, new TemptGoal(this, 1.1D, Ingredient.of(AMTagRegistry.SEAL_FOODSTUFFS), false));
+        this.goalSelector.addGoal(10, new TemptGoal(this, 1.1D, Ingredient.fromValues(Stream.of(new Ingredient.TagValue(AMTagRegistry.SEAL_BREEDABLES), new Ingredient.TagValue(AMTagRegistry.SEAL_OFFERINGS))), false));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, EntityFlyingFish.class, 55, true, true, null));
         this.targetSelector.addGoal(2, new CreatureAITargetItems(this, false));
     }
@@ -402,7 +401,7 @@ public class EntitySeal extends Animal implements ISemiAquatic, IHerdPanic, ITar
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.getItem() == AMItemRegistry.LOBSTER_TAIL.get();
+        return stack.is(AMTagRegistry.SEAL_BREEDABLES);
     }
 
     @Nullable
@@ -441,12 +440,12 @@ public class EntitySeal extends Animal implements ISemiAquatic, IHerdPanic, ITar
 
     @Override
     public boolean canTargetItem(ItemStack stack) {
-        return stack.is(AMTagRegistry.SEAL_FOODSTUFFS);
+        return stack.is(AMTagRegistry.SEAL_OFFERINGS) || stack.is(AMTagRegistry.SEAL_BREEDABLES);
     }
 
     @Override
     public void onGetItem(ItemEntity e) {
-        if (e.getItem().is(ItemTags.FISHES)) {
+        if (e.getItem().is(AMTagRegistry.SEAL_OFFERINGS)) {
             fishFeedings++;
             this.gameEvent(GameEvent.EAT);
             this.playSound(SoundEvents.CAT_EAT, this.getSoundVolume(), this.getVoicePitch());

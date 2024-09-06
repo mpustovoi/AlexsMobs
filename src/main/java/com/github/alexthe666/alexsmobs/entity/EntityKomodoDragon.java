@@ -43,6 +43,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -51,7 +52,7 @@ import java.util.function.Predicate;
 
 public class EntityKomodoDragon extends TamableAnimal implements ITargetsDroppedItems, IFollower {
 
-    private static final Ingredient TEMPTATION_ITEMS = Ingredient.of(Items.ROTTEN_FLESH);
+    private static final Ingredient TEMPTATION_ITEMS = Ingredient.of(AMTagRegistry.KOMODO_DRAGON_TAMEABLES);
     public int slaughterCooldown = 0;
     public int timeUntilSpit = this.random.nextInt(12000) + 24000;
     public float nextJostleAngleFromServer;
@@ -197,7 +198,7 @@ public class EntityKomodoDragon extends TamableAnimal implements ITargetsDropped
 
     public boolean isFood(ItemStack stack) {
         Item item = stack.getItem();
-        return isTame() && item == Items.ROTTEN_FLESH;
+        return isTame() && stack.is(AMTagRegistry.KOMODO_DRAGON_BREEDABLES);
     }
 
     public void tick() {
@@ -349,10 +350,9 @@ public class EntityKomodoDragon extends TamableAnimal implements ITargetsDropped
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        Item item = itemstack.getItem();
         InteractionResult type = super.mobInteract(player, hand);
 
-        if(item == Items.ROTTEN_FLESH){
+        if(itemstack.is(AMTagRegistry.KOMODO_DRAGON_TAMEABLES)){
             if(!isTame()){
                 int size = itemstack.getCount();
                 int tameAmount = 58 + random.nextInt(16);
@@ -377,7 +377,7 @@ public class EntityKomodoDragon extends TamableAnimal implements ITargetsDropped
                 this.usePlayerItem(player, hand, itemstack);
                 this.setSaddled(true);
                 return InteractionResult.SUCCESS;
-            }else if(itemstack.getItem() == Items.SHEARS && this.isSaddled()){
+            }else if(itemstack.is(Tags.Items.SHEARS) && this.isSaddled()){
                 this.setSaddled(false);
                 this.spawnAtLocation(Items.SADDLE);
                 return InteractionResult.SUCCESS;
@@ -431,7 +431,7 @@ public class EntityKomodoDragon extends TamableAnimal implements ITargetsDropped
 
     @Override
     public boolean canTargetItem(ItemStack stack) {
-        return stack.getItem() == Items.ROTTEN_FLESH || stack.getItem().getFoodProperties() != null && stack.getItem().getFoodProperties().isMeat();
+        return stack.is(AMTagRegistry.KOMODO_DRAGON_TAMEABLES) || stack.getItem().getFoodProperties() != null && stack.getItem().getFoodProperties().isMeat();
     }
 
     public boolean isSaddled() {

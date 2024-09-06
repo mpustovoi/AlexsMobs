@@ -77,7 +77,7 @@ public class EntityRainFrog extends Animal implements ITargetsDroppedItems,IDanc
 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new TemptGoal(this, 1.0D, Ingredient.of(AMTagRegistry.INSECT_ITEMS), false));
+        this.goalSelector.addGoal(1, new TemptGoal(this, 1.0D, Ingredient.of(AMTagRegistry.RAIN_FROG_BREEDABLES), false));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new AvoidEntityGoal(this, EntityRattlesnake.class, 9, 1.3D, 1.0D));
         this.goalSelector.addGoal(5, new AIBurrow());
@@ -88,7 +88,7 @@ public class EntityRainFrog extends Animal implements ITargetsDroppedItems,IDanc
     }
 
     public static boolean canRainFrogSpawn(EntityType animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        boolean spawnBlock = worldIn.getBlockState(pos.below()).is(BlockTags.SAND);
+        boolean spawnBlock = worldIn.getBlockState(pos.below()).is(AMTagRegistry.RAIN_FROG_SPAWNS);
         return spawnBlock && worldIn.getLevelData() != null && (worldIn.getLevelData().isThundering() || worldIn.getLevelData().isRaining());
     }
 
@@ -146,7 +146,7 @@ public class EntityRainFrog extends Animal implements ITargetsDroppedItems,IDanc
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.is(AMTagRegistry.INSECT_ITEMS);
+        return stack.is(AMTagRegistry.RAIN_FROG_BREEDABLES);
     }
 
     @javax.annotation.Nullable

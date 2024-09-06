@@ -1,6 +1,7 @@
 package com.github.alexthe666.alexsmobs.entity.ai;
 
 import com.github.alexthe666.alexsmobs.entity.EntityEndergrade;
+import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
@@ -77,6 +78,6 @@ public class EndergradeAIBreakFlowers extends MoveToBlockGoal {
 
     @Override
     protected boolean isValidTarget(LevelReader worldIn, BlockPos pos) {
-        return worldIn.getBlockState(pos).getBlock() == Blocks.CHORUS_FLOWER;
+        return worldIn.getBlockState(pos).is(AMTagRegistry.ENDERGRADE_BREAKABLES);
     }
 }

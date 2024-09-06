@@ -6,6 +6,7 @@ import com.github.alexthe666.alexsmobs.entity.ai.AnimalAIFleeLight;
 import com.github.alexthe666.alexsmobs.entity.ai.CreatureAITargetItems;
 import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
+import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -32,7 +33,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Blocks;
@@ -115,7 +115,7 @@ public class EntityCockroach extends Animal implements Shearable, net.minecraftf
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.1D));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, Ingredient.of(AMItemRegistry.MARACA.get(), Items.SUGAR), false));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, Ingredient.of(AMTagRegistry.COCKROACH_FOODSTUFFS), false));
         this.goalSelector.addGoal(4, new AvoidEntityGoal(this, EntityCentipedeHead.class, 16, 1.3D, 1.0D));
         this.goalSelector.addGoal(4, new AvoidEntityGoal(this, Player.class, 8, 1.3D, 1.0D) {
             public boolean canUse() {
@@ -151,7 +151,7 @@ public class EntityCockroach extends Animal implements Shearable, net.minecraftf
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.getItem() == Items.SUGAR;
+        return stack.is(AMTagRegistry.COCKROACH_BREEDABLES);
     }
 
     public void addAdditionalSaveData(CompoundTag compound) {
@@ -405,7 +405,7 @@ public class EntityCockroach extends Animal implements Shearable, net.minecraftf
 
     @Override
     public boolean canTargetItem(ItemStack stack) {
-        return stack.getItem().isEdible() || stack.getItem() == Items.SUGAR;
+        return stack.getItem().isEdible() || stack.is(AMTagRegistry.COCKROACH_BREEDABLES);
     }
 
     public void travel(Vec3 vec3d) {
@@ -428,7 +428,7 @@ public class EntityCockroach extends Animal implements Shearable, net.minecraftf
                 this.spawnAtLocation(e.getItem().getCraftingRemainingItem().copy());
             }
             this.heal(5);
-            if (e.getItem().getItem() == Items.BREAD || e.getItem().getItem() == Items.SUGAR) {
+            if (e.getItem().is(AMTagRegistry.COCKROACH_FOODSTUFFS)) {
                 this.setBreaded(true);
             }
         }

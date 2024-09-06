@@ -21,7 +21,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -55,10 +54,12 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class EntityBaldEagle extends TamableAnimal implements IFollower, IFalconry {
 
@@ -123,16 +124,15 @@ public class EntityBaldEagle extends TamableAnimal implements IFollower, IFalcon
         this.goalSelector.addGoal(3, new AITackle());
         this.goalSelector.addGoal(4, new AILandOnGlove());
         this.goalSelector.addGoal(5, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(6, new TemptGoal(this, 1.1D, Ingredient.of(AMTagRegistry.BALD_EAGLE_TAMEABLES), false));
-        this.goalSelector.addGoal(7, new TemptGoal(this, 1.1D, Ingredient.of(ItemTags.FISHES), false));
-        this.goalSelector.addGoal(8, new AIWanderIdle());
-        this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 6.0F) {
+        this.goalSelector.addGoal(6, new TemptGoal(this, 1.1D, Ingredient.fromValues(Stream.of(new Ingredient.TagValue(AMTagRegistry.BALD_EAGLE_TAMEABLES), new Ingredient.TagValue(AMTagRegistry.BALD_EAGLE_FOODSTUFFS))), false));
+        this.goalSelector.addGoal(7, new AIWanderIdle());
+        this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6.0F) {
             @Override
             public boolean canUse() {
                 return EntityBaldEagle.this.returnControlTime == 0 && super.canUse();
             }
         });
-        this.goalSelector.addGoal(10, new RandomLookAroundGoal(this) {
+        this.goalSelector.addGoal(9, new RandomLookAroundGoal(this) {
             @Override
             public boolean canUse() {
                 return EntityBaldEagle.this.returnControlTime == 0 && super.canUse();
@@ -183,7 +183,7 @@ public class EntityBaldEagle extends TamableAnimal implements IFollower, IFalcon
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.getItem() == Items.ROTTEN_FLESH;
+        return stack.is(AMTagRegistry.BALD_EAGLE_BREEDABLES);
     }
 
     private void switchNavigator(boolean onLand) {
@@ -343,7 +343,7 @@ public class EntityBaldEagle extends TamableAnimal implements IFollower, IFalcon
         ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
         InteractionResult type = super.mobInteract(player, hand);
-        if (itemstack.is(ItemTags.FISHES) && this.getHealth() < this.getMaxHealth()) {
+        if (itemstack.is(AMTagRegistry.BALD_EAGLE_FOODSTUFFS) && this.getHealth() < this.getMaxHealth()) {
             this.heal(10);
             if (!player.isCreative()) {
                 itemstack.shrink(1);
@@ -376,7 +376,7 @@ public class EntityBaldEagle extends TamableAnimal implements IFollower, IFalcon
                     this.playSound(SoundEvents.ARMOR_EQUIP_LEATHER, this.getSoundVolume(), this.getVoicePitch());
                     return InteractionResult.SUCCESS;
                 }
-            } else if (item == Items.SHEARS && this.hasCap()) {
+            } else if (itemstack.is(Tags.Items.SHEARS) && this.hasCap()) {
                 this.gameEvent(GameEvent.ENTITY_INTERACT);
                 this.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
                 if (!this.level().isClientSide) {

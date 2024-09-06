@@ -7,6 +7,7 @@ import com.github.alexthe666.alexsmobs.entity.ai.FlyingAITargetDroppedItems;
 import com.github.alexthe666.alexsmobs.entity.util.Maths;
 import com.github.alexthe666.alexsmobs.misc.AMBlockPos;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
+import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
@@ -44,7 +45,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
@@ -195,7 +195,7 @@ public class EntityToucan extends Animal implements ITargetsDroppedItems {
 
     public boolean isFood(ItemStack stack) {
         Item item = stack.getItem();
-        return item == Items.EGG;
+        return stack.is(AMTagRegistry.TOUCAN_BREEDABLES);
     }
 
     @Override
@@ -275,10 +275,10 @@ public class EntityToucan extends Animal implements ITargetsDroppedItems {
                 if (this.getMainHandItem().hasCraftingRemainingItem()) {
                     this.spawnAtLocation(this.getMainHandItem().getCraftingRemainingItem());
                 }
-                final var mainHandItem = this.getMainHandItem().getItem();
-                if (mainHandItem == Items.GOLDEN_APPLE) {
+                final var mainHandItem = this.getMainHandItem();
+                if (mainHandItem.is(AMTagRegistry.TOUCAN_GOLDEN_FOODS)) {
                     this.setGoldenTime(12000);
-                } else if (mainHandItem == Items.ENCHANTED_GOLDEN_APPLE) {
+                } else if (mainHandItem.is(AMTagRegistry.TOUCAN_ENCHANTED_GOLDEN_FOODS)) {
                     this.setGoldenTime(-1);
                     this.setEnchanted(true);
                 }

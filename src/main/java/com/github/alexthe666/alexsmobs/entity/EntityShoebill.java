@@ -1,9 +1,7 @@
 package com.github.alexthe666.alexsmobs.entity;
 
-import com.github.alexthe666.alexsmobs.block.AMBlockRegistry;
 import com.github.alexthe666.alexsmobs.config.AMConfig;
 import com.github.alexthe666.alexsmobs.entity.ai.*;
-import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import com.github.alexthe666.citadel.animation.Animation;
@@ -292,7 +290,7 @@ public class EntityShoebill extends Animal implements IAnimatedEntity, ITargetsD
 
     public InteractionResult mobInteract(Player p_230254_1_, InteractionHand p_230254_2_) {
         ItemStack lvt_3_1_ = p_230254_1_.getItemInHand(p_230254_2_);
-         if (lvt_3_1_.getItem() == AMBlockRegistry.TERRAPIN_EGG.get().asItem() && this.isAlive()) {
+         if (lvt_3_1_.is(AMTagRegistry.SHOEBILL_LUCK_FOODS) && this.isAlive()) {
              if(this.luckLevel < 10) {
                  luckLevel = Mth.clamp(luckLevel + 1, 0, 10);
                  for (int i = 0; i < 6 + random.nextInt(3); i++) {
@@ -311,7 +309,7 @@ public class EntityShoebill extends Animal implements IAnimatedEntity, ITargetsD
                  }
                  return InteractionResult.SUCCESS;
              }
-         } else if (lvt_3_1_.getItem() == AMBlockRegistry.CROCODILE_EGG.get().asItem() && this.isAlive()) {
+         } else if (lvt_3_1_.is(AMTagRegistry.SHOEBILL_LURE_FOODS) && this.isAlive()) {
              if(this.lureLevel < 10){
                  lureLevel = Mth.clamp(lureLevel + 1, 0, 10);
                  fishingCooldown = Mth.clamp(fishingCooldown - 200, 200, 2400);
@@ -346,7 +344,7 @@ public class EntityShoebill extends Animal implements IAnimatedEntity, ITargetsD
 
     @Override
     public boolean canTargetItem(ItemStack stack) {
-        return stack.is(AMTagRegistry.SHOEBILL_FOODSTUFFS) || stack.getItem() == AMItemRegistry.BLOBFISH.get() && luckLevel < 10 || stack.getItem() == AMBlockRegistry.CROCODILE_EGG.get().asItem() && lureLevel < 10;
+        return stack.is(AMTagRegistry.SHOEBILL_FOODSTUFFS) || stack.is(AMTagRegistry.SHOEBILL_LUCK_FOODS) && luckLevel < 10 || stack.is(AMTagRegistry.SHOEBILL_LURE_FOODS) && lureLevel < 10;
     }
 
     public void resetFishingCooldown(){
@@ -356,10 +354,10 @@ public class EntityShoebill extends Animal implements IAnimatedEntity, ITargetsD
     public void onGetItem(ItemEntity e) {
         this.gameEvent(GameEvent.EAT);
         this.playSound(SoundEvents.CAT_EAT, this.getSoundVolume(), this.getVoicePitch());
-        if(e.getItem().getItem() == AMItemRegistry.BLOBFISH.get()){
+        if (e.getItem().is(AMTagRegistry.SHOEBILL_LUCK_FOODS)) {
             luckLevel = Mth.clamp(luckLevel + 1, 0, 10);
         }
-        else if(e.getItem().getItem() == AMBlockRegistry.CROCODILE_EGG.get().asItem()){
+        else if (e.getItem().is(AMTagRegistry.SHOEBILL_LURE_FOODS)) {
             lureLevel = Mth.clamp(lureLevel + 1, 0, 10);
         }
         this.heal(5);

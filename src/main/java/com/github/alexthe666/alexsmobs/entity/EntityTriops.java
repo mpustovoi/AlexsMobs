@@ -6,6 +6,7 @@ import com.github.alexthe666.alexsmobs.entity.ai.AquaticMoveController;
 import com.github.alexthe666.alexsmobs.entity.ai.CreatureAITargetItems;
 import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
+import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -42,7 +43,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -276,7 +276,7 @@ public class EntityTriops extends WaterAnimal implements ITargetsDroppedItems, B
 
     @Override
     public boolean canTargetItem(ItemStack stack) {
-        return (stack.is(Tags.Items.CROPS_CARROT) || stack.is(AMItemRegistry.MOSQUITO_LARVA.get())) && !fedCarrot;
+        return (stack.is(AMTagRegistry.TRIOPS_BREEDABLES) || stack.is(AMItemRegistry.MOSQUITO_LARVA.get())) && !fedCarrot;
     }
 
     @Override
@@ -305,7 +305,7 @@ public class EntityTriops extends WaterAnimal implements ITargetsDroppedItems, B
             this.gameEvent(GameEvent.EAT);
             this.playSound(SoundEvents.CAT_EAT, this.getVoicePitch(), this.getSoundVolume());
             this.heal(5);
-            if (itemstack.is(Tags.Items.CROPS_CARROT)) {
+            if (itemstack.is(AMTagRegistry.TRIOPS_BREEDABLES)) {
                 if (!this.level().isClientSide) {
                     if (breedCooldown == 0) {
                         this.level().broadcastEntityEvent(this, (byte) 67);

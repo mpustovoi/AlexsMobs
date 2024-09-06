@@ -42,12 +42,9 @@ import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
@@ -80,8 +77,7 @@ public class EntityPlatypus extends Animal implements ISemiAquatic, ITargetsDrop
     }
 
     public static boolean canPlatypusSpawn(EntityType type, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource randomIn) {
-        boolean spawnBlock = worldIn.getBlockState(pos.below()).is(AMTagRegistry.PLATYPUS_SPAWNS);
-        return (worldIn.getBlockState(pos.below()).getBlock() == Blocks.DIRT || spawnBlock) && pos.getY() < worldIn.getSeaLevel() + 4;
+        return worldIn.getBlockState(pos.below()).is(AMTagRegistry.PLATYPUS_SPAWNS) && pos.getY() < worldIn.getSeaLevel() + 4;
     }
 
     public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
@@ -93,8 +89,7 @@ public class EntityPlatypus extends Animal implements ISemiAquatic, ITargetsDrop
     }
 
     public boolean isFood(ItemStack stack) {
-        Item item = stack.getItem();
-        return item == AMItemRegistry.LOBSTER_TAIL.get() || item == AMItemRegistry.COOKED_LOBSTER_TAIL.get();
+        return stack.is(AMTagRegistry.PLATYPUS_BREEDABLES);
     }
 
 
@@ -142,7 +137,6 @@ public class EntityPlatypus extends Animal implements ISemiAquatic, ITargetsDrop
     @Nonnull
     public InteractionResult mobInteract(@Nonnull Player player, @Nonnull InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        boolean redstone = itemstack.getItem() == Items.REDSTONE || itemstack.getItem() == Items.REDSTONE_BLOCK;
         if(itemstack.getItem() == AMItemRegistry.FEDORA.get() && !this.hasFedora()){
             if (!player.isCreative()) {
                 itemstack.shrink(1);
@@ -150,8 +144,8 @@ public class EntityPlatypus extends Animal implements ISemiAquatic, ITargetsDrop
             this.setFedora(true);
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
-        if (redstone && !this.isSensing()) {
-            superCharged = itemstack.getItem() == Items.REDSTONE_BLOCK;
+        if (itemstack.is(AMTagRegistry.PLATYPUS_CHARGEABLES) && !this.isSensing()) {
+            superCharged = itemstack.is(AMTagRegistry.PLATYPUS_SUPER_CHARGEABLES);
             if (!player.isCreative()) {
                 itemstack.shrink(1);
             }
@@ -169,7 +163,7 @@ public class EntityPlatypus extends Animal implements ISemiAquatic, ITargetsDrop
         this.goalSelector.addGoal(2, new LayEggGoal(this, 1.0D));
         this.goalSelector.addGoal(2, new BreedGoal(this, 0.8D));
         this.goalSelector.addGoal(3, new PanicGoal(this, 1.1D));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, Ingredient.of(Items.REDSTONE, Items.REDSTONE_BLOCK), false){
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, Ingredient.of(AMTagRegistry.PLATYPUS_CHARGEABLES), false){
             public void start() {
                 super.start();
                 EntityPlatypus.this.setSensingVisual(true);
@@ -464,11 +458,9 @@ public class EntityPlatypus extends Animal implements ISemiAquatic, ITargetsDrop
     public void onGetItem(ItemEntity e) {
         this.gameEvent(GameEvent.EAT);
         this.playSound(SoundEvents.CAT_EAT, this.getSoundVolume(), this.getVoicePitch());
-        if(e.getItem().getItem() == Items.REDSTONE || e.getItem().getItem() == Items.REDSTONE_BLOCK){
-            superCharged = e.getItem().getItem() == Items.REDSTONE_BLOCK;
+        if(e.getItem().is(AMTagRegistry.PLATYPUS_CHARGEABLES)) {
+            superCharged = e.getItem().is(AMTagRegistry.PLATYPUS_SUPER_CHARGEABLES);
             this.setSensing(true);
-        }else{
-            this.heal(6);
         }
     }
 

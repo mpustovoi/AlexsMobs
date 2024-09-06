@@ -125,7 +125,7 @@ public class EntityMudskipper extends TamableAnimal implements IFollower, ISemiA
         this.goalSelector.addGoal(2, new MudskipperAIAttack(this));
         this.goalSelector.addGoal(3, new AnimalAIFindWater(this));
         this.goalSelector.addGoal(3, new AnimalAILeaveWater(this));
-        this.goalSelector.addGoal(4, new TemptGoal(this, 1.1D, Ingredient.of(AMItemRegistry.LOBSTER_TAIL.get(), AMItemRegistry.COOKED_LOBSTER_TAIL.get()), false));
+        this.goalSelector.addGoal(4, new TemptGoal(this, 1.1D, Ingredient.of(AMTagRegistry.MUDSKIPPER_TAMEABLES), false));
         this.goalSelector.addGoal(5, new BreedGoal(this, 0.8D));
         this.goalSelector.addGoal(6, new PanicGoal(this, 1D));
         this.goalSelector.addGoal(7, new MudskipperAIDisplay(this));
@@ -434,14 +434,14 @@ public class EntityMudskipper extends TamableAnimal implements IFollower, ISemiA
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.is(AMTagRegistry.INSECT_ITEMS) || stack.getItem() == AMItemRegistry.LOBSTER_TAIL.get() || stack.getItem() == AMItemRegistry.COOKED_LOBSTER_TAIL.get();
+        return stack.is(AMTagRegistry.MUDSKIPPER_BREEDABLES);
     }
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         Item item = itemstack.getItem();
         InteractionResult type = super.mobInteract(player, hand);
-        if (!isTame() && (item == AMItemRegistry.LOBSTER_TAIL.get() || item == AMItemRegistry.COOKED_LOBSTER_TAIL.get())) {
+        if (!isTame() && itemstack.is(AMTagRegistry.MUDSKIPPER_TAMEABLES)) {
             this.usePlayerItem(player, hand, itemstack);
             this.openMouth(10);
             this.gameEvent(GameEvent.EAT);
@@ -454,7 +454,7 @@ public class EntityMudskipper extends TamableAnimal implements IFollower, ISemiA
             }
             return InteractionResult.SUCCESS;
         }
-        if (isTame() && itemstack.is(AMTagRegistry.INSECT_ITEMS)) {
+        if (isTame() && itemstack.is(AMTagRegistry.MUDSKIPPER_FOODSTUFFS)) {
             if (this.getHealth() < this.getMaxHealth()) {
                 this.usePlayerItem(player, hand, itemstack);
                 this.openMouth(10);

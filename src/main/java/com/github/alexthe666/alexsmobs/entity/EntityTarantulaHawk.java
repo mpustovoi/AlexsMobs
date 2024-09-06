@@ -27,7 +27,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -51,7 +50,6 @@ import net.minecraft.world.entity.monster.Spider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Blocks;
@@ -64,6 +62,7 @@ import javax.annotation.Nullable;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Stream;
 
 public class EntityTarantulaHawk extends TamableAnimal implements IFollower {
 
@@ -103,8 +102,7 @@ public class EntityTarantulaHawk extends TamableAnimal implements IFollower {
     }
 
     public static boolean canTarantulaHawkSpawn(EntityType<? extends Animal> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        boolean spawnBlock = worldIn.getBlockState(pos.below()).is(Blocks.SAND);
-        return (spawnBlock) && worldIn.getRawBrightness(pos, 0) > 8 || isBiomeNether(worldIn, pos) || AMConfig.fireproofTarantulaHawk;
+        return worldIn.getBlockState(pos.below()).is(AMTagRegistry.TARANTULA_HAWK_SPAWNS) && worldIn.getRawBrightness(pos, 0) > 8 || isBiomeNether(worldIn, pos) || AMConfig.fireproofTarantulaHawk;
     }
 
     public static AttributeSupplier.Builder bakeAttributes() {
@@ -136,7 +134,7 @@ public class EntityTarantulaHawk extends TamableAnimal implements IFollower {
         this.goalSelector.addGoal(4, new AIMelee());
         this.goalSelector.addGoal(5, new AIBury());
         this.goalSelector.addGoal(6, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(7, new TemptGoal(this, 1.1D, Ingredient.of(Items.SPIDER_EYE, Items.FERMENTED_SPIDER_EYE), false));
+        this.goalSelector.addGoal(7, new TemptGoal(this, 1.1D, Ingredient.fromValues(Stream.of(new Ingredient.TagValue(AMTagRegistry.TARANTULA_HAWK_BREEDABLES), new Ingredient.TagValue(AMTagRegistry.TARANTULA_HAWK_TAMEABLES), new Ingredient.TagValue(AMTagRegistry.TARANTULA_HAWK_FOODSTUFFS))), false));
         this.goalSelector.addGoal(8, new AIWalkIdle());
         this.goalSelector.addGoal(9, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
@@ -434,9 +432,8 @@ public class EntityTarantulaHawk extends TamableAnimal implements IFollower {
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        Item item = itemstack.getItem();
         InteractionResult type = super.mobInteract(player, hand);
-        if (!isTame() && item == Items.SPIDER_EYE) {
+        if (!isTame() && itemstack.is(AMTagRegistry.TARANTULA_HAWK_TAMEABLES)) {
             this.usePlayerItem(player, hand, itemstack);
             this.gameEvent(GameEvent.EAT);
             this.playSound(SoundEvents.STRIDER_EAT, this.getSoundVolume(), this.getVoicePitch());
@@ -449,7 +446,7 @@ public class EntityTarantulaHawk extends TamableAnimal implements IFollower {
             }
             return InteractionResult.SUCCESS;
         }
-        if (isTame() && itemstack.is(ItemTags.FLOWERS)) {
+        if (isTame() && itemstack.is(AMTagRegistry.TARANTULA_HAWK_FOODSTUFFS)) {
             if (this.getHealth() < this.getMaxHealth()) {
                 this.usePlayerItem(player, hand, itemstack);
                 this.gameEvent(GameEvent.EAT);
@@ -495,7 +492,7 @@ public class EntityTarantulaHawk extends TamableAnimal implements IFollower {
 
     public boolean isFood(ItemStack stack) {
         Item item = stack.getItem();
-        return isTame() && item == Items.FERMENTED_SPIDER_EYE;
+        return isTame() && stack.is(AMTagRegistry.TARANTULA_HAWK_BREEDABLES);
     }
 
 

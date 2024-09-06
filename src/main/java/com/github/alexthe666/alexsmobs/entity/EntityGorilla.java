@@ -21,7 +21,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -100,13 +99,13 @@ public class EntityGorilla extends TamableAnimal implements IAnimatedEntity, ITa
         return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 30.0D).add(Attributes.FOLLOW_RANGE, 32.0D).add(Attributes.ARMOR, 0.0D).add(Attributes.ATTACK_DAMAGE, 7.0D).add(Attributes.KNOCKBACK_RESISTANCE, 0.5F).add(Attributes.MOVEMENT_SPEED, 0.25F);
     }
 
-    public static boolean isBanana(ItemStack stack) {
+    public static boolean isTameableFood(ItemStack stack) {
         return stack.is(AMTagRegistry.BANANAS);
     }
 
     public static boolean canGorillaSpawn(EntityType<EntityGorilla> gorilla, LevelAccessor worldIn, MobSpawnType reason, BlockPos p_223317_3_, RandomSource random) {
         BlockState blockstate = worldIn.getBlockState(p_223317_3_.below());
-        return (blockstate.is(BlockTags.LEAVES) || blockstate.is(Blocks.GRASS_BLOCK) || blockstate.is(BlockTags.LOGS) || blockstate.is(Blocks.AIR)) && worldIn.getRawBrightness(p_223317_3_, 0) > 8;
+        return (blockstate.is(AMTagRegistry.GORILLA_SPAWNS) || blockstate.is(Blocks.AIR)) && worldIn.getRawBrightness(p_223317_3_, 0) > 8;
     }
 
     public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
@@ -115,7 +114,7 @@ public class EntityGorilla extends TamableAnimal implements IAnimatedEntity, ITa
 
     public boolean isFood(ItemStack stack) {
         Item item = stack.getItem();
-        return isTame() && isBanana(stack);
+        return isTame() && stack.is(AMTagRegistry.GORILLA_BREEDABLES);
     }
 
     public int getMaxSpawnClusterSize() {
@@ -146,7 +145,7 @@ public class EntityGorilla extends TamableAnimal implements IAnimatedEntity, ITa
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, true));
         this.goalSelector.addGoal(2, new GorillaAIFollowCaravan(this, 0.8D));
         this.goalSelector.addGoal(3, new GorillaAIChargeLooker(this, 1.6D));
-        this.goalSelector.addGoal(4, new TameableAITempt(this, 1.1D, Ingredient.of(AMTagRegistry.BANANAS), false));
+        this.goalSelector.addGoal(4, new TameableAITempt(this, 1.1D, Ingredient.of(AMTagRegistry.GORILLA_TAMEABLES), false));
         this.goalSelector.addGoal(4, new AnimalAIRideParent(this, 1.25D));
         this.goalSelector.addGoal(6, new AIWalkIdle(this, 0.8D));
         this.goalSelector.addGoal(5, new GorillaAIForageLeaves(this));
@@ -312,7 +311,7 @@ public class EntityGorilla extends TamableAnimal implements IAnimatedEntity, ITa
         if (itemstack.getItem() == Items.NAME_TAG) {
             return super.mobInteract(player, hand);
         }
-        if (isTame() && isBanana(itemstack) && this.getHealth() < this.getMaxHealth()) {
+        if (isTame() && isTameableFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
             this.heal(5);
             this.usePlayerItem(player, hand, itemstack);
             this.gameEvent(GameEvent.EAT);
@@ -385,7 +384,7 @@ public class EntityGorilla extends TamableAnimal implements IAnimatedEntity, ITa
                 ItemStack stack = this.getItemInHand(InteractionHand.MAIN_HAND);
                 if (!stack.isEmpty()) {
                     this.heal(4);
-                    if (isBanana(stack) && bananaThrowerID != null) {
+                    if (isTameableFood(stack) && bananaThrowerID != null) {
                         if (getRandom().nextFloat() < 0.3F) {
                             this.setTame(true);
                             this.setOwnerUUID(this.bananaThrowerID);
@@ -521,7 +520,7 @@ public class EntityGorilla extends TamableAnimal implements IAnimatedEntity, ITa
         }
         this.setItemInHand(InteractionHand.MAIN_HAND, duplicate);
         Entity thrower = targetEntity.getOwner();
-        if (EntityGorilla.isBanana(targetEntity.getItem()) && thrower != null && !this.isTame()) {
+        if (EntityGorilla.isTameableFood(targetEntity.getItem()) && thrower != null && !this.isTame()) {
             bananaThrowerID = thrower.getUUID();
         }
     }

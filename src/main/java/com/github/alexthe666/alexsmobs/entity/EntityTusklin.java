@@ -6,6 +6,7 @@ import com.github.alexthe666.alexsmobs.entity.ai.*;
 import com.github.alexthe666.alexsmobs.entity.util.Maths;
 import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
+import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import com.github.alexthe666.citadel.animation.Animation;
 import com.github.alexthe666.citadel.animation.AnimationHandler;
 import com.github.alexthe666.citadel.animation.IAnimatedEntity;
@@ -73,7 +74,7 @@ public class EntityTusklin extends Animal implements IAnimatedEntity {
     }
 
     public static boolean canTusklinSpawn(EntityType<? extends Animal> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return worldIn.getRawBrightness(pos, 0) > 8 && (worldIn.getBlockState(pos.below()).isSolid() || worldIn.getBlockState(pos.below()).is(Blocks.SNOW_BLOCK));
+        return worldIn.getRawBrightness(pos, 0) > 8 && (worldIn.getBlockState(pos.below()).isSolid() || worldIn.getBlockState(pos.below()).is(AMTagRegistry.TUSKLIN_SPAWNS));
     }
 
     public static AttributeSupplier.Builder bakeAttributes() {
@@ -263,7 +264,7 @@ public class EntityTusklin extends Animal implements IAnimatedEntity {
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.is(Items.RED_MUSHROOM);
+        return stack.is(AMTagRegistry.TUSKLIN_BREEDABLES);
     }
 
     protected void defineSynchedData() {
@@ -297,7 +298,7 @@ public class EntityTusklin extends Animal implements IAnimatedEntity {
     }
 
     public boolean isMushroom(ItemStack stack) {
-        return stack.is(Items.BROWN_MUSHROOM);
+        return stack.is(AMTagRegistry.TUSKLIN_FOODSTUFFS);
     }
 
     public int getPassiveTicks() {

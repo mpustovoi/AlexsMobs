@@ -125,7 +125,7 @@ public class EntityAlligatorSnappingTurtle extends Animal implements ISemiAquati
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.getItem() == Items.COD;
+        return stack.is(AMTagRegistry.ALLIGATOR_SNAPPING_TURTLE_BREEDABLES);
     }
 
     public boolean onClimbable() {

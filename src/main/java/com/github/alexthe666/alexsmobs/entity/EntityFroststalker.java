@@ -36,7 +36,6 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.enchantment.FrostWalkerEnchantment;
@@ -111,7 +110,7 @@ public class EntityFroststalker extends Animal implements IAnimatedEntity, ISemi
     }
 
     public static boolean canFroststalkerSpawn(EntityType<? extends Animal> animal, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return worldIn.getRawBrightness(pos, 0) > 8 && (worldIn.getBlockState(pos.below()).is(Blocks.ICE) || worldIn.getBlockState(pos.below()).isSolid() || worldIn.getBlockState(pos.below()).is(Blocks.SNOW_BLOCK));
+        return worldIn.getRawBrightness(pos, 0) > 8 && (worldIn.getBlockState(pos.below()).is(AMTagRegistry.FROSTSTALKER_SPAWNS) || worldIn.getBlockState(pos.below()).isSolid());
     }
 
     @Nullable
@@ -227,7 +226,7 @@ public class EntityFroststalker extends Animal implements IAnimatedEntity, ISemi
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.is(Items.PORKCHOP) || stack.is(Items.COOKED_PORKCHOP);
+        return stack.is(AMTagRegistry.FROSTSTALKER_BREEDABLES);
     }
 
     public void tick() {

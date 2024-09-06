@@ -3,7 +3,6 @@ package com.github.alexthe666.alexsmobs.entity;
 import com.github.alexthe666.alexsmobs.config.AMConfig;
 import com.github.alexthe666.alexsmobs.entity.ai.*;
 import com.github.alexthe666.alexsmobs.entity.util.Maths;
-import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMSoundRegistry;
 import com.github.alexthe666.alexsmobs.misc.AMTagRegistry;
 import net.minecraft.core.BlockPos;
@@ -58,6 +57,7 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
+import java.util.stream.Stream;
 
 public class EntityMantisShrimp extends TamableAnimal implements ISemiAquatic, IFollower {
 
@@ -169,7 +169,7 @@ public class EntityMantisShrimp extends TamableAnimal implements ISemiAquatic, I
         this.goalSelector.addGoal(4, new AnimalAIFindWater(this));
         this.goalSelector.addGoal(4, new AnimalAILeaveWater(this));
         this.goalSelector.addGoal(5, new BreedGoal(this, 0.8D));
-        this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, Ingredient.of(Items.TROPICAL_FISH, AMItemRegistry.LOBSTER_TAIL.get(), AMItemRegistry.COOKED_LOBSTER_TAIL.get()), false));
+        this.goalSelector.addGoal(6, new TemptGoal(this, 1.0D, Ingredient.fromValues(Stream.of(new Ingredient.TagValue(AMTagRegistry.MANTIS_SHRIMP_BREEDABLES), new Ingredient.TagValue(AMTagRegistry.MANTIS_SHRIMP_TAMEABLES))), false));
         this.goalSelector.addGoal(7, new SemiAquaticAIRandomSwimming(this, 1.0D, 30));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -237,7 +237,7 @@ public class EntityMantisShrimp extends TamableAnimal implements ISemiAquatic, I
 
     public boolean isFood(ItemStack stack) {
         Item item = stack.getItem();
-        return isTame() && (item == AMItemRegistry.LOBSTER_TAIL.get() || item == AMItemRegistry.COOKED_LOBSTER_TAIL.get());
+        return isTame() && stack.is(AMTagRegistry.MANTIS_SHRIMP_BREEDABLES);
     }
 
     public boolean doHurtTarget(Entity entityIn) {
@@ -321,9 +321,8 @@ public class EntityMantisShrimp extends TamableAnimal implements ISemiAquatic, I
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        Item item = itemstack.getItem();
         InteractionResult type = super.mobInteract(player, hand);
-        if (!isTame() && item == Items.TROPICAL_FISH) {
+        if (!isTame() && itemstack.is(AMTagRegistry.MANTIS_SHRIMP_TAMEABLES)) {
             this.usePlayerItem(player, hand, itemstack);
             this.gameEvent(GameEvent.EAT);
             this.playSound(SoundEvents.STRIDER_EAT, this.getSoundVolume(), this.getVoicePitch());

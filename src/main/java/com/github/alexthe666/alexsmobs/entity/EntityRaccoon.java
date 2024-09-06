@@ -56,6 +56,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.fluids.FluidType;
 
 import javax.annotation.Nullable;
@@ -199,15 +200,14 @@ public class EntityRaccoon extends TamableAnimal implements IAnimatedEntity, IFo
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.getItem() == Items.BREAD;
+        return stack.is(AMTagRegistry.RACCOON_BREEDABLES);
     }
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        Item item = itemstack.getItem();
         InteractionResult type = super.mobInteract(player, hand);
         boolean owner = this.isTame() && isOwnedBy(player);
-        if (item == Items.GLOW_BERRIES && bondWithBlueJays(player.getUUID())) {
+        if (itemstack.is(AMTagRegistry.RACCOON_TEAMING_FOODS) && bondWithBlueJays(player.getUUID())) {
             this.usePlayerItem(player, hand, itemstack);
             this.level().broadcastEntityEvent(this, (byte) 93);
             return InteractionResult.SUCCESS;
@@ -231,7 +231,7 @@ public class EntityRaccoon extends TamableAnimal implements IAnimatedEntity, IFo
                 return InteractionResult.SUCCESS;
             }
             return InteractionResult.PASS;
-        } else if (owner && this.getColor() != null && itemstack.getItem() == Items.SHEARS) {
+        } else if (owner && this.getColor() != null && itemstack.is(Tags.Items.SHEARS)) {
             this.gameEvent(GameEvent.ENTITY_INTERACT);
             this.playSound(SoundEvents.SHEEP_SHEAR, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
             if (this.getColor() != null) {
@@ -434,7 +434,7 @@ public class EntityRaccoon extends TamableAnimal implements IAnimatedEntity, IFo
     }
 
     public void postWashItem(ItemStack stack) {
-        if (stack.getItem() == Items.EGG && eggThrowerUUID != null && !this.isTame()) {
+        if (stack.is(AMTagRegistry.RACCOON_TAMEABLES) && eggThrowerUUID != null && !this.isTame()) {
             if (getRandom().nextFloat() < 0.3F) {
                 this.setTame(true);
                 this.setOwnerUUID(eggThrowerUUID);
@@ -584,12 +584,12 @@ public class EntityRaccoon extends TamableAnimal implements IAnimatedEntity, IFo
             this.spawnAtLocation(this.getItemInHand(InteractionHand.MAIN_HAND), 0.0F);
         }
         Entity thrower = e.getOwner();
-        if (e.getItem().is(Items.GLOW_BERRIES) && thrower != null && bondWithBlueJays(thrower.getUUID())) {
+        if (e.getItem().is(AMTagRegistry.RACCOON_TEAMING_FOODS) && thrower != null && bondWithBlueJays(thrower.getUUID())) {
             this.level().broadcastEntityEvent(this, (byte) 93);
         } else {
             this.setItemInHand(InteractionHand.MAIN_HAND, duplicate);
         }
-        if (e.getItem().getItem() == Items.EGG && thrower != null) {
+        if (e.getItem().is(AMTagRegistry.RACCOON_TAMEABLES) && thrower != null) {
             eggThrowerUUID = thrower.getUUID();
         } else {
             eggThrowerUUID = null;
