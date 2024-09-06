@@ -376,6 +376,12 @@ public class EntityVoidWormPart extends LivingEntity implements IHurtableMultipa
         return true;
     }
 
+    @Nullable
+    public ItemStack getPickResult() {
+        Entity parent = this.getParent();
+        return parent != null ? parent.getPickResult() : ItemStack.EMPTY;
+    }
+
     @Override
     public HumanoidArm getMainArm() {
         return null;
