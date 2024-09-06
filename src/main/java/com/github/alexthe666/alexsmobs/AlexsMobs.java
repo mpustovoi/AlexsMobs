@@ -174,6 +174,7 @@ public class AlexsMobs {
         AMAdvancementTriggerRegistry.init();
         AMEffectRegistry.init();
         AMRecipeRegistry.init();
+        PROXY.initPathfinding();
     }
 
     private void setupClient(FMLClientSetupEvent event) {

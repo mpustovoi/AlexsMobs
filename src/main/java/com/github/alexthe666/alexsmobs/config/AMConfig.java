@@ -267,6 +267,7 @@ public class AMConfig {
     public static double transmutingWeightAddStep = 3;
     public static double transmutingWeightRemoveStep = 4;
     public static double underminerDisappearDistance = 8;
+    public static int pathfindingThreads = 5;
 
     public static void bake(ModConfig config) {
         try {
@@ -518,6 +519,7 @@ public class AMConfig {
             transmutingWeightAddStep = ConfigHolder.COMMON.transmutingWeightAddStep.get();
             transmutingWeightRemoveStep = ConfigHolder.COMMON.transmutingWeightRemoveStep.get();
             underminerDisappearDistance = ConfigHolder.COMMON.underminerDisappearDistance.get();
+            pathfindingThreads = ConfigHolder.COMMON.pathfindingThreads.get();
         } catch (Exception e) {
             AlexsMobs.LOGGER.warn("An exception was caused trying to load the config for Alex's Mobs.");
             e.printStackTrace();

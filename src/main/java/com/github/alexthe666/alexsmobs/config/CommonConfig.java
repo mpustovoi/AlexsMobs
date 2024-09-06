@@ -255,6 +255,7 @@ public class CommonConfig {
     public ForgeConfigSpec.DoubleValue transmutingWeightRemoveStep;
     public ForgeConfigSpec.DoubleValue underminerDisappearDistance;
     public final ForgeConfigSpec.BooleanValue skreechersSummonWarden;
+    public ForgeConfigSpec.IntValue pathfindingThreads;
 
     public CommonConfig(final ForgeConfigSpec.Builder builder) {
         builder.push("general");
@@ -315,6 +316,7 @@ public class CommonConfig {
         transmutingWeightRemoveStep = buildDouble(builder, "transmutingWeightRemoveStep", "all", 4.0F, 1.0F, 10000.0F, "The step value that an item looses when selecting it as the transmutation result. Keep this number higher than the one above for balance reasons. Higher number = less likely to appear after transmuting multiple times.");
         skreechersSummonWarden = buildBoolean(builder, "skreechersSummonWarden", "all", true, "True if skreechers can summon a new warden, when applicable.");
         underminerDisappearDistance = buildDouble(builder, "underminerDisappearDistance", "all", 8.0F, 1.0F, 10000.0F, "The distance in blocks that will cause an underminer to dissapear when approached by a player.");
+        builder.pop();
         builder.push("spawning");
         grizzlyBearSpawnWeight = buildInt(builder, "grizzlyBearSpawnWeight", "spawns", AMConfig.grizzlyBearSpawnWeight, 0, 1000, "Spawn Weight, added to a pool of other mobs for each biome. Higher number = higher chance of spawning. 0 = disable spawn");
         grizzlyBearSpawnRolls = buildInt(builder, "grizzlyBearSpawnRolls", "spawns", AMConfig.grizzlyBearSpawnRolls, 0, Integer.MAX_VALUE, "Random roll chance to enable mob spawning. Higher number = lower chance of spawning");
@@ -492,6 +494,7 @@ public class CommonConfig {
         caimanSpawnRolls = buildInt(builder, "caimanSpawnRolls", "spawns", AMConfig.caimanSpawnRolls, 0, Integer.MAX_VALUE, "Random roll chance to enable mob spawning. Higher number = lower chance of spawning");
         triopsSpawnWeight = buildInt(builder, "triopsSpawnWeight", "spawns", AMConfig.triopsSpawnWeight, 0, 1000, "Spawn Weight, added to a pool of other mobs for each biome. Higher number = higher chance of spawning. 0 = disable spawn");
         triopsSpawnRolls = buildInt(builder, "triopsSpawnRolls", "spawns", AMConfig.triopsSpawnRolls, 0, Integer.MAX_VALUE, "Random roll chance to enable mob spawning. Higher number = lower chance of spawning");
+        builder.pop();
         builder.push("uniqueSpawning");
         caveCentipedeSpawnHeight = buildInt(builder, "caveCentipedeSpawnHeight", "all", AMConfig.caveCentipedeSpawnHeight, -64, 320, "Maximum world y-level that cave centipedes can spawn at");
         blobfishSpawnHeight = buildInt(builder, "blobfishSpawnHeight", "all", AMConfig.blobfishSpawnHeight, -64, 320, "Maximum world y-level that blobfish can spawn at");
@@ -507,8 +510,11 @@ public class CommonConfig {
         restrictUnderminerSpawns = buildBoolean(builder, "restrictUnderminerSpawns", "uniqueSpawning", true, "Whether to restrict all underminer spawns to abandoned mineshafts.");
         farseerBorderSpawnDistance = buildInt(builder, "farseerBorderSpawnDistance", "uniqueSpawning", AMConfig.farseerBorderSpawnDistance, 2, 1000000000, "The maximum distance a farseer can spawn from the world border.");
         murmurSpawnHeight = buildInt(builder, "murmurSpawnHeight", "all", AMConfig.murmurSpawnHeight, -64, 320, "Maximum world y-level that murmur can spawn at");
+        builder.pop();
         builder.push("dangerZone");
         superSecretSettings = buildBoolean(builder, "superSecretSettings", "dangerZone", false, "Its been so long...");
+        pathfindingThreads = buildInt(builder, "pathfindingThreads", "dangerZone", AMConfig.pathfindingThreads, 1, 100,"How many cpu cores some mobs(elephants, leafcutter ants, bison etc) should utilize when pathing. Bigger number = less impact on TPS");
+        builder.pop();
     }
 
     private static ForgeConfigSpec.BooleanValue buildBoolean(ForgeConfigSpec.Builder builder, String name, String catagory, boolean defaultValue, String comment) {
